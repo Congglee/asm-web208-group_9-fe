@@ -5,7 +5,7 @@
 }
 
 .dropdown-menu-container {
-  @apply absolute left-[-100px] top-[25px] w-[1050px] mt-[15px] bg-white opacity-0 invisible py-[25px] px-[30px] shadow-[0_2px_20px_#00000017] flex flex-row gap-x-[40px] z-10 after:content-[''] after:absolute after:w-full after:h-5 after:top-0 after:left-0 after:bg-transparent after:translate-y-[-100%] transition-all duration-[0.25s] ease-linear;
+  @apply absolute left-[-100px] top-[20px] w-[650px] mt-[15px] bg-white opacity-0 invisible py-[25px] px-[30px] shadow-[0_2px_20px_#00000017] flex flex-row gap-x-[70px] z-10 after:content-[''] after:absolute after:w-full after:h-5 after:top-0 after:left-0 after:bg-transparent after:translate-y-[-100%] transition-all duration-[0.25s] ease-linear;
 }
 
 .dropdown-menu-image {
