@@ -17,7 +17,84 @@
       </div>
 
       <div class="header-auth flex items-center gap-x-2 text-white text-xs">
-        <a href="">Đăng nhập hoặc Tạo tài khoản</a>
+        <div class="header-auth flex items-center gap-x-2 text-white text-xs">
+          <div *ngIf="userData && role === true" class="dropdown">
+            Hello {{ userData.name }}
+            <div class="dropdown-container">
+              <div class="dropdown-col">
+                <div class="dropdown-list">
+                  <div
+                    class="dropdown-item mb-[10px] text-[#505050] text-xs hover:text-digital-400 border-b-2 border-solid border-[#d3d3d3] pb-2"
+                  >
+                    <a routerLink="/admin">Quản trị Admin</a>
+                  </div>
+                  <div
+                    class="dropdown-item mb-[10px] text-[#505050] text-xs hover:text-digital-400 border-b-2 border-solid border-[#d3d3d3] pb-2"
+                  >
+                    Tài khoản
+                  </div>
+                  <div
+                    class="dropdown-item mb-[10px] text-[#505050] text-xs hover:text-digital-400 border-b-2 border-solid border-[#d3d3d3] pb-2"
+                  >
+                    Giỏ hàng
+                  </div>
+                  <div
+                    class="dropdown-item mb-[10px] text-[#505050] text-xs hover:text-digital-400 border-b-2 border-solid border-[#d3d3d3] pb-2"
+                  >
+                    Hóa đơn
+                  </div>
+                  <div
+                    class="dropdown-item mb-[10px] text-[#505050] text-xs hover:text-digital-400"
+                    (click)="onHandleLogOut()"
+                  >
+                    Đăng xuất
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="userData && role === false" class="dropdown">
+            Hello {{ userData.name }}
+            <div class="dropdown-container">
+              <div class="dropdown-col">
+                <div class="dropdown-list">
+                  <div
+                    class="dropdown-item mb-[10px] text-[#505050] text-xs hover:text-digital-400 border-b-2 border-solid border-[#d3d3d3] pb-2"
+                  >
+                    Tài khoản
+                  </div>
+                  <div
+                    class="dropdown-item mb-[10px] text-[#505050] text-xs hover:text-digital-400 border-b-2 border-solid border-[#d3d3d3] pb-2"
+                  >
+                    Giỏ hàng
+                  </div>
+                  <div
+                    class="dropdown-item mb-[10px] text-[#505050] text-xs hover:text-digital-400 border-b-2 border-solid border-[#d3d3d3] pb-2"
+                  >
+                    Hóa đơn
+                  </div>
+                  <div
+                    class="dropdown-item mb-[10px] text-[#505050] text-xs hover:text-digital-400"
+                    (click)="onHandleLogOut()"
+                  >
+                    Đăng Xuất
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="!userData || role === undefined" class="dropdown">
+            <a class="pr-2" routerLink="/sign-in">Đăng nhập</a>
+            <a
+              routerLink="/sign-up"
+              class="border-l border-solid border-[#ccc] pl-3"
+              >Tạo tài khoản</a
+            >
+          </div>
+        </div>
+
+        <!-- <a routerLink="sign-in">Đăng nhập hoặc </a>
+        <a routerLink="sign-up">Tạo tài khoản</a> -->
 
         <div class="header-socials flex items-center">
           <div class="border-l border-solid border-[#ccc] pl-3 pr-3">

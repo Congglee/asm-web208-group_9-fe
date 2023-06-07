@@ -5,6 +5,8 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { HomePageComponent } from './pages/client/home-page/home-page.component';
 import { ProductsPageComponent } from './pages/client/products-page/products-page.component';
 import { ProductDetailPageComponent } from './pages/client/product-detail-page/product-detail-page.component';
+import { RegisterPageComponent } from './pages/client/register-page/register-page.component';
+import { SigninPageComponent } from './pages/client/signin-page/signin-page.component';
 
 const routes: Routes = [
   {
@@ -17,6 +19,8 @@ const routes: Routes = [
       { path: 'products/category/:id', component: ProductsPageComponent },
     ],
   },
+  { path: 'sign-up', component: RegisterPageComponent },
+  { path: 'sign-in', component: SigninPageComponent },
 
   {
     path: 'admin',
