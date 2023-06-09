@@ -1,0 +1,50 @@
+.toast-top-right {
+  @apply fixed top-10 right-10 w-64 max-w-xs bg-gray-800 text-red-600 rounded-md shadow-lg;
+
+  .toast-title {
+    @apply font-bold;
+  }
+
+  .toast-message {
+    @apply mt-2;
+  }
+}
+
+// /* Tùy chỉnh màu sắc */
+// .abc {
+//   color: red;
+// }
+// .toast {
+//   background-color: #e20d0d; // Màu nền
+//   color: #08c708; // Màu chữ
+// }
+
+// .toast-title {
+//   font-weight: bold;
+// }
+
+// .toast-message {
+//   font-weight: normal;
+// }
+
+// /* Tùy chỉnh kiểu hiển thị */
+// .toast-top-right {
+//   top: 80px; // Vị trí top
+//   right: 20px; // Vị trí right
+//   width: 300px; // Chiều rộng
+//   max-width: 90%; // Chiều rộng tối đa
+//   transform: translateX(0); // Hiệu ứng di chuyển
+// }
+
+// // /* ... tùy chỉnh khác ... */
+// {
+//   timeOut: 3000, // Thời gian hiển thị (đơn vị: ms)
+//   positionClass: 'toast-top-right', // Vị trí hiển thị
+//   preventDuplicates: true, // Ngăn chặn hiển thị các thông báo trùng lặp
+//   closeButton: true, // Hiển thị nút đóng thông báo
+//   progressBar: true, // Hiển thị thanh tiến trình
+//   enableHtml: true, // Cho phép sử dụng mã HTML trong thông báo
+//   toastClass: 'toast', // Lớp CSS cho thông báo
+//   titleClass: 'toast-title', // Lớp CSS cho tiêu đề thông báo
+//   messageClass: 'toast-message', // Lớp CSS cho nội dung thông báo
+// } as Partial<ToastrConfig>

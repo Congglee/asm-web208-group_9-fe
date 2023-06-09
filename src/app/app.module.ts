@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WebsiteLayoutComponent } from './layouts/website-layout/website-layout.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { NavigationComponent } from './components/admin/navigation/navigation.component';
@@ -30,6 +32,7 @@ import { UpdateProductPageComponent } from './pages/admin/product/update-product
 import { ProductListAdminComponent } from './components/admin/product-list-admin/product-list-admin.component';
 import { AddProductFormComponent } from './components/admin/add-product-form/add-product-form.component';
 import { UpdateProductFormComponent } from './components/admin/update-product-form/update-product-form.component';
+import { SigninPageComponent } from './pages/client/signin-page/signin-page.component';
 
 @NgModule({
   declarations: [
@@ -59,12 +62,26 @@ import { UpdateProductFormComponent } from './components/admin/update-product-fo
     ProductListAdminComponent,
     AddProductFormComponent,
     UpdateProductFormComponent,
+    SigninPageComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 60000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+      closeButton: true,
+      progressBar: true,
+      enableHtml: true,
+      toastClass: 'toast',
+      titleClass: 'toast-title',
+      messageClass: 'toast-message',
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],

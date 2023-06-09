@@ -9,6 +9,8 @@ import { DashBoardPageComponent } from './pages/admin/dash-board-page/dash-board
 import { ManageProductComponent } from './pages/admin/product/manage-product/manage-product.component';
 import { AddProductPageComponent } from './pages/admin/product/add-product-page/add-product-page.component';
 import { UpdateProductPageComponent } from './pages/admin/product/update-product-page/update-product-page.component';
+import { RegisterPageComponent } from './pages/client/register-page/register-page.component';
+import { SigninPageComponent } from './pages/client/signin-page/signin-page.component';
 
 const routes: Routes = [
   {
@@ -21,6 +23,8 @@ const routes: Routes = [
       { path: 'products/category/:id', component: ProductsPageComponent },
     ],
   },
+  { path: 'sign-up', component: RegisterPageComponent },
+  { path: 'sign-in', component: SigninPageComponent },
 
   {
     path: 'admin',
