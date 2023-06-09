@@ -24,7 +24,10 @@ export class AddProductFormComponent {
   products: IProduct[] = [];
   productForm!: FormGroup;
   showSuccessMsg: boolean = false;
-  selectedFiles: FileList | null = null;
+
+  selectedThumbFile: File | null = null;
+  selectedImageFiles: File[] = [];
+  invalidFileNames: string[] = [];
 
   constructor(
     private productService: ProductService,
@@ -42,11 +45,11 @@ export class AddProductFormComponent {
     });
 
     this.productForm = this.formBuilder.group({
-      name: ['', [Validators.required, this.validateFields.bind(this)]],
+      name: ['', [Validators.required, this.validateProductName.bind(this)]],
       price: [0, Validators.required],
       thumb: [''],
       images: this.formBuilder.array([]),
-      description: [''],
+      description: ['', this.validateDescription.bind(this)],
       categoryId: ['', Validators.required],
     });
   }
@@ -54,7 +57,7 @@ export class AddProductFormComponent {
   // ? AbstractControl: đại diện cho một class base cho các form control, chẳng hạn như input fields, select box và form group. Nó xác định các thuộc tính và phương thức phổ biến mà các form control nên triển khai.
 
   // ? ValidationErrors: là một cấu trúc giống như từ điển, trong đó mỗi thuộc tính đại diện cho một lỗi xác thực. Tên thuộc tính thường là một chuỗi mô tả lỗi và giá trị có thể là bất kỳ dữ liệu nào (thường là đúng) cho biết sự hiện diện của lỗi.
-  validateFields(control: AbstractControl): ValidationErrors | null {
+  validateProductName(control: AbstractControl): ValidationErrors | null {
     // control: đại diện cho các form control đang được xác thực
 
     const productName = control.value.trim(); // truy xuất giá trị đã nhập trong form controll name và xóa mọi ký tự khoảng trắng ở đầu hoặc cuối bằng cách sử dụng phương thức trim().
@@ -75,31 +78,41 @@ export class AddProductFormComponent {
       return { duplicate: true }; // và người dùng nên chọn một tên khác.
     }
 
+    const description = control.value;
+    if (description && description.trim() === '') {
+      return { whitespace: true };
+    }
+
     // Trả về là null nếu không có lỗi xác thực
     return null;
   }
 
-  onSelect(event: any) {
-    if (event.target.files && event.target.files.length > 0) {
-      this.selectedFiles = event.target.files as FileList;
-      const imageArray = this.productForm.get('images') as FormArray;
+  validateDescription(control: AbstractControl): ValidationErrors | null {
+    const description = control.value;
+    if (description && description.trim() === '') {
+      return { whitespace: true };
+    }
+    return null;
+  }
 
-      // Clear existing images in the array
-      imageArray.clear();
+  onSelectThumb(event: any) {
+    const file = event.target.files[0];
+    this.selectedThumbFile = file;
+    // this.validateFileTypes([this.selectedThumbFile]);
+  }
 
-      // Loop through the selected files and add them to the array
-      if (this.selectedFiles && this.selectedFiles.length > 0) {
-        for (let i = 0; i < this.selectedFiles.length; i++) {
-          const file = this.selectedFiles[i];
-          const reader = new FileReader();
+  onSelectImages(event: any) {
+    const files = event.target.files;
+    this.selectedImageFiles = Array.from(files);
+    this.validateFileTypes(this.selectedImageFiles);
+  }
 
-          reader.onload = (e: any) => {
-            const imageData = e.target.result;
-            imageArray.push(new FormControl(imageData));
-          };
-
-          reader.readAsDataURL(file);
-        }
+  validateFileTypes(files: File[]) {
+    this.invalidFileNames = [];
+    for (const file of files) {
+      const extension = file.name.split('.').pop()?.toLowerCase();
+      if (extension && !['jpg', 'jpeg', 'png', 'webp'].includes(extension)) {
+        this.invalidFileNames.push(file.name);
       }
     }
   }
@@ -108,21 +121,25 @@ export class AddProductFormComponent {
     this.productForm.markAllAsTouched();
     if (
       this.productForm.valid &&
-      this.selectedFiles &&
-      this.selectedFiles.length > 0
+      this.selectedThumbFile &&
+      this.selectedImageFiles.length > 0
     ) {
       const formData = new FormData();
       formData.append('name', this.productForm.value.name);
       formData.append('price', this.productForm.value.price);
-      formData.append('description', this.productForm.value.description);
+      this.productForm.value.description !== ''
+        ? formData.append('description', this.productForm.value.description)
+        : '';
       formData.append('categoryId', this.productForm.value.categoryId);
 
-      if (this.selectedFiles[0]) {
-        formData.append('thumb', this.selectedFiles[0]);
+      if (this.selectedThumbFile) {
+        formData.append('thumb', this.selectedThumbFile);
       }
 
-      for (let i = 0; i < this.selectedFiles.length; i++) {
-        formData.append('images', this.selectedFiles[i]);
+      if (this.selectedImageFiles.length > 0) {
+        for (const file of this.selectedImageFiles) {
+          formData.append('images', file);
+        }
       }
 
       this.productService.addProduct(formData).subscribe(
@@ -135,7 +152,8 @@ export class AddProductFormComponent {
             description: '',
             categoryId: '',
           });
-          // this.selectedFiles = [];
+          this.selectedThumbFile = null;
+          this.selectedImageFiles = [];
         },
         (error) => {
           console.log(error.message);

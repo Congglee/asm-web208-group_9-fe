@@ -24,9 +24,12 @@ export class UpdateProductFormComponent {
   categories: ICategory[] = [];
   products: IProduct[] = [];
   productForm!: FormGroup;
+
   showSuccessMsg: boolean = false;
+
   selectedThumbFile: File | null = null;
   selectedImageFiles: File[] = [];
+  invalidFileNames: string[] = [];
 
   constructor(
     private productService: ProductService,
@@ -45,11 +48,11 @@ export class UpdateProductFormComponent {
     });
 
     this.productForm = this.formBuilder.group({
-      name: ['', [Validators.required, this.validateFields.bind(this)]],
+      name: ['', [Validators.required, this.validateProductName.bind(this)]],
       price: [0, Validators.required],
       thumb: [''],
       images: [],
-      description: [''],
+      description: ['', this.validateDescription.bind(this)],
       categoryId: ['', Validators.required],
     });
 
@@ -71,7 +74,7 @@ export class UpdateProductFormComponent {
     });
   }
 
-  validateFields(control: AbstractControl): ValidationErrors | null {
+  validateProductName(control: AbstractControl): ValidationErrors | null {
     const productName = control.value.trim();
     if (productName === '') {
       return { required: true };
@@ -90,6 +93,14 @@ export class UpdateProductFormComponent {
     return null;
   }
 
+  validateDescription(control: AbstractControl): ValidationErrors | null {
+    const description = control.value;
+    if (description && description.trim() === '') {
+      return { whitespace: true };
+    }
+    return null;
+  }
+
   onSelectThumb(event: any) {
     const file = event.target.files[0];
     this.selectedThumbFile = file;
@@ -98,6 +109,17 @@ export class UpdateProductFormComponent {
   onSelectImages(event: any) {
     const files = event.target.files;
     this.selectedImageFiles = Array.from(files);
+    this.validateFileTypes(this.selectedImageFiles);
+  }
+
+  validateFileTypes(files: File[]) {
+    this.invalidFileNames = [];
+    for (const file of files) {
+      const extension = file.name.split('.').pop()?.toLowerCase();
+      if (extension && !['jpg', 'jpeg', 'png', 'webp'].includes(extension)) {
+        this.invalidFileNames.push(file.name);
+      }
+    }
   }
 
   onHandleUpdateProduct() {
@@ -106,7 +128,9 @@ export class UpdateProductFormComponent {
       const formData = new FormData();
       formData.append('name', this.productForm.value.name);
       formData.append('price', this.productForm.value.price);
-      formData.append('description', this.productForm.value.description);
+      this.productForm.value.description !== ''
+        ? formData.append('description', this.productForm.value.description)
+        : '';
       formData.append(
         'categoryId',
         this.productForm.value.categoryId._id
