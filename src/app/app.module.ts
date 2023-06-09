@@ -26,6 +26,12 @@ import { GallerySalesComponent } from './components/client/gallery-sales/gallery
 import { NewArrivalsProductsComponent } from './components/client/new-arrivals-products/new-arrivals-products.component';
 import { BlogListHomeComponent } from './components/client/blog-list-home/blog-list-home.component';
 import { BrandListComponent } from './components/client/brand-list/brand-list.component';
+import { ManageProductComponent } from './pages/admin/product/manage-product/manage-product.component';
+import { AddProductPageComponent } from './pages/admin/product/add-product-page/add-product-page.component';
+import { UpdateProductPageComponent } from './pages/admin/product/update-product-page/update-product-page.component';
+import { ProductListAdminComponent } from './components/admin/product-list-admin/product-list-admin.component';
+import { AddProductFormComponent } from './components/admin/add-product-form/add-product-form.component';
+import { UpdateProductFormComponent } from './components/admin/update-product-form/update-product-form.component';
 import { SigninPageComponent } from './pages/client/signin-page/signin-page.component';
 
 @NgModule({
@@ -50,6 +56,12 @@ import { SigninPageComponent } from './pages/client/signin-page/signin-page.comp
     NewArrivalsProductsComponent,
     BlogListHomeComponent,
     BrandListComponent,
+    ManageProductComponent,
+    AddProductPageComponent,
+    UpdateProductPageComponent,
+    ProductListAdminComponent,
+    AddProductFormComponent,
+    UpdateProductFormComponent,
     SigninPageComponent,
   ],
   imports: [
