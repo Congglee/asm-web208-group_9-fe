@@ -5,6 +5,10 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { HomePageComponent } from './pages/client/home-page/home-page.component';
 import { ProductsPageComponent } from './pages/client/products-page/products-page.component';
 import { ProductDetailPageComponent } from './pages/client/product-detail-page/product-detail-page.component';
+import { DashBoardPageComponent } from './pages/admin/dash-board-page/dash-board-page.component';
+import { ManageProductComponent } from './pages/admin/product/manage-product/manage-product.component';
+import { AddProductPageComponent } from './pages/admin/product/add-product-page/add-product-page.component';
+import { UpdateProductPageComponent } from './pages/admin/product/update-product-page/update-product-page.component';
 
 const routes: Routes = [
   {
@@ -21,7 +25,13 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminLayoutComponent,
-    children: [],
+    children: [
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: 'dashboard', component: DashBoardPageComponent },
+      { path: 'product', component: ManageProductComponent },
+      { path: 'product/add', component: AddProductPageComponent },
+      { path: 'product/:id/update', component: UpdateProductPageComponent },
+    ],
   },
 ];
 
