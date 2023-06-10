@@ -18,9 +18,11 @@ export class ProductService {
     return new HttpHeaders().set('Authorization', `Bearer ${accessToken}`);
   }
 
-  getProducts(): Observable<IProductsResponse> {
+  getProducts(params?: any): Observable<IProductsResponse> {
+    const options = { params };
     return this.http.get<IProductsResponse>(
-      'http://127.0.0.1:8080/api/products'
+      'http://127.0.0.1:8080/api/products',
+      options
     );
   }
 
