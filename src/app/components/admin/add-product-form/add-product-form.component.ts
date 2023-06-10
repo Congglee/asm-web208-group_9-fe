@@ -145,15 +145,16 @@ export class AddProductFormComponent {
       this.productService.addProduct(formData).subscribe(
         (data) => {
           this.showSuccessMsg = true;
-          this.productForm.reset({
-            name: '',
-            price: 0,
-            thumb: '',
-            description: '',
-            categoryId: '',
-          });
-          this.selectedThumbFile = null;
-          this.selectedImageFiles = [];
+          // this.productForm.reset({
+          //   name: '',
+          //   price: 0,
+          //   thumb: '',
+          //   description: '',
+          //   categoryId: '',
+          // });
+          // this.selectedThumbFile = null;
+          // this.selectedImageFiles = [];
+          window.location.reload();
         },
         (error) => {
           console.log(error.message);

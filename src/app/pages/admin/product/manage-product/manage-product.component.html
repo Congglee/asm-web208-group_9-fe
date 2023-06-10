@@ -8,7 +8,10 @@
     </a>
 
     <div class="w-full md:w-[35%]">
-      <form novalidate="" class="flex items-center">
+      <form
+        class="flex items-center"
+        (ngSubmit)="onFormSubmit(searchInput.value)"
+      >
         <label for="simple-search" class="sr-only">Search</label>
         <div class="relative w-full">
           <div
@@ -33,6 +36,7 @@
             id="simple-search"
             placeholder="Tìm kiếm"
             required=""
+            #searchInput
             class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
           />
         </div>
@@ -42,14 +46,18 @@
     <select
       id="small"
       class="block w-[200px] p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 cursor-pointer"
+      (change)="onSortChange($event)"
     >
       <option selected>Sắp xếp theo</option>
-      <option value="US">Tên, từ A - Z</option>
-      <option value="CA">Tên, từ Z - A</option>
-      <option value="FR">Giá tăng dần</option>
-      <option value="DE">Giá giảm dần</option>
+      <option value="name">Theo bảng chữ cái, A-Z</option>
+      <option value="-name">Theo thứ tự bảng chữ cái, Z-A</option>
+      <option value="price">Giá, thấp đến cao</option>
+      <option value="-price">Giá từ cao đến thấp</option>
     </select>
   </div>
 
-  <app-product-list-admin></app-product-list-admin>
+  <app-product-list-admin
+    [products]="products"
+    (onRemove)="removeProduct($event)"
+  ></app-product-list-admin>
 </div>

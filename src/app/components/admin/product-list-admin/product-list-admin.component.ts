@@ -8,28 +8,12 @@ import { ProductService } from 'src/app/services/product/product.service';
   styleUrls: ['./product-list-admin.component.scss'],
 })
 export class ProductListAdminComponent {
-  products: IProduct[] = [];
-
-  constructor(private productService: ProductService) {}
-
-  ngOnInit() {
-    this.productService.getProducts().subscribe((data) => {
-      this.products = data.products;
-    });
-  }
+  @Input() products!: IProduct[];
+  @Output() onRemove: EventEmitter<number | string> = new EventEmitter<
+    number | string
+  >();
 
   removeProduct(_id?: number | string) {
-    if (confirm('Bạn có chắc chắn muốn xóa sản phẩm này ?')) {
-      this.productService.deleteProduct(_id).subscribe(
-        () => {
-          this.products = this.products.filter(
-            (product) => product._id !== _id
-          );
-        },
-        (error) => {
-          console.log(error.message);
-        }
-      );
-    }
+    this.onRemove.emit(_id);
   }
 }
