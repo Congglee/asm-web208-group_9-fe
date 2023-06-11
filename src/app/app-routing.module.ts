@@ -11,6 +11,9 @@ import { AddProductPageComponent } from './pages/admin/product/add-product-page/
 import { UpdateProductPageComponent } from './pages/admin/product/update-product-page/update-product-page.component';
 import { RegisterPageComponent } from './pages/client/register-page/register-page.component';
 import { SigninPageComponent } from './pages/client/signin-page/signin-page.component';
+import { ManageCategoryComponent } from './pages/admin/category/manage-category/manage-category.component';
+import { AddCategoryPageComponent } from './pages/admin/category/add-category-page/add-category-page.component';
+import { UpdateCategoryPageComponent } from './pages/admin/category/update-category-page/update-category-page.component';
 
 const routes: Routes = [
   {
@@ -35,6 +38,10 @@ const routes: Routes = [
       { path: 'product', component: ManageProductComponent },
       { path: 'product/add', component: AddProductPageComponent },
       { path: 'product/:id/update', component: UpdateProductPageComponent },
+
+      { path: 'category', component: ManageCategoryComponent },
+      { path: 'category/add', component: AddCategoryPageComponent },
+      { path: 'category/:id/update', component: UpdateCategoryPageComponent },
     ],
   },
 ];
