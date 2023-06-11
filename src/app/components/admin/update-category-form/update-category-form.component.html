@@ -1,0 +1,95 @@
+<h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
+  Cập nhật danh mục
+</h2>
+<form
+  action="#"
+  [formGroup]="categoryForm"
+  (ngSubmit)="onHandleUpdateCategory()"
+>
+  <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+    <div class="sm:col-span-2">
+      <label
+        for="name"
+        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >Tên danh mục</label
+      >
+      <input
+        type="text"
+        id="name"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+        placeholder="Nhập vào tên danh mục"
+        formControlName="name"
+      />
+
+      <div
+        class="mt-2"
+        *ngIf="
+          categoryForm.get('name')?.invalid &&
+          (categoryForm.get('name')?.dirty || categoryForm.get('name')?.touched)
+        "
+      >
+        <span *ngIf="categoryForm.get('name')?.errors?.['required']">
+          <span class="text-base text-red-600 font-semibold"
+            >Tên danh mục là bắt buộc</span
+          >
+        </span>
+        <span *ngIf="categoryForm.get('name')?.errors?.['duplicate']">
+          <span class="text-base text-red-600 font-semibold"
+            >Tên danh mục đã tồn tại. Vui lòng nhập tên khác.</span
+          >
+        </span>
+      </div>
+    </div>
+
+    <div class="sm:col-span-2">
+      <label
+        for=""
+        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >Ảnh danh mục</label
+      >
+      <input
+        type="text"
+        id=""
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+        placeholder="Link ảnh của danh mục"
+        formControlName="image"
+      />
+
+      <div
+        class="mt-2"
+        *ngIf="
+          categoryForm.get('image')?.invalid &&
+          (categoryForm.get('image')?.dirty ||
+            categoryForm.get('image')?.touched)
+        "
+      >
+        <span
+          *ngIf="categoryForm.get('image')?.errors?.['whitespace']"
+          class="text-base text-red-600 font-semibold"
+        >
+          Vui lòng nhập url ảnh danh mục kết thúc bằng .jpg, .jpeg, .png và
+          .webp
+        </span>
+      </div>
+
+      <img
+        class="h-[300px] w-[300px] mt-2"
+        [src]="category?.image"
+        alt="category image"
+      />
+    </div>
+  </div>
+
+  <div *ngIf="showSuccessMsg" class="mt-2">
+    <span class="text-xl font-bold text-green-500"
+      >Cập nhật danh mục thành công</span
+    >
+  </div>
+
+  <button
+    type="submit"
+    class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800"
+  >
+    Cập nhật
+  </button>
+</form>

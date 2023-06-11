@@ -33,6 +33,12 @@ import { ProductListAdminComponent } from './components/admin/product-list-admin
 import { AddProductFormComponent } from './components/admin/add-product-form/add-product-form.component';
 import { UpdateProductFormComponent } from './components/admin/update-product-form/update-product-form.component';
 import { SigninPageComponent } from './pages/client/signin-page/signin-page.component';
+import { ManageCategoryComponent } from './pages/admin/category/manage-category/manage-category.component';
+import { AddCategoryPageComponent } from './pages/admin/category/add-category-page/add-category-page.component';
+import { UpdateCategoryPageComponent } from './pages/admin/category/update-category-page/update-category-page.component';
+import { CategoryListAdminComponent } from './components/admin/category-list-admin/category-list-admin.component';
+import { AddCategoryFormComponent } from './components/admin/add-category-form/add-category-form.component';
+import { UpdateCategoryFormComponent } from './components/admin/update-category-form/update-category-form.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +69,12 @@ import { SigninPageComponent } from './pages/client/signin-page/signin-page.comp
     AddProductFormComponent,
     UpdateProductFormComponent,
     SigninPageComponent,
+    ManageCategoryComponent,
+    AddCategoryPageComponent,
+    UpdateCategoryPageComponent,
+    CategoryListAdminComponent,
+    AddCategoryFormComponent,
+    UpdateCategoryFormComponent,
   ],
   imports: [
     BrowserModule,

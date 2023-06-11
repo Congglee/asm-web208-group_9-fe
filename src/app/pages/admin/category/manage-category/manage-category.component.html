@@ -1,0 +1,15 @@
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+  <div class="flex items-center gap-4 bg-white dark:bg-gray-900 px-6 py-3">
+    <a
+      routerLink="add"
+      class="text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-3 py-2 text-center"
+    >
+      Thêm mới danh mục
+    </a>
+  </div>
+
+  <app-category-list-admin
+    [categories]="categories"
+    (onRemove)="removeCategory($event)"
+  ></app-category-list-admin>
+</div>
