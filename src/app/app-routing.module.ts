@@ -19,12 +19,12 @@ const routes: Routes = [
     children: [
       { path: '', component: HomePageComponent },
       { path: 'products', component: ProductsPageComponent },
-      { path: 'products/:id', component: ProductDetailPageComponent },
+      { path: 'products/:slug', component: ProductDetailPageComponent },
       { path: 'products/category/:id', component: ProductsPageComponent },
+      { path: 'sign-up', component: RegisterPageComponent },
+      { path: 'sign-in', component: SigninPageComponent },
     ],
   },
-  { path: 'sign-up', component: RegisterPageComponent },
-  { path: 'sign-in', component: SigninPageComponent },
 
   {
     path: 'admin',

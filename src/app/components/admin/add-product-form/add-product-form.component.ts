@@ -23,10 +23,13 @@ export class AddProductFormComponent {
   categories: ICategory[] = [];
   products: IProduct[] = [];
   productForm!: FormGroup;
+
+  // Success message
   showSuccessMsg: boolean = false;
 
   selectedThumbFile: File | null = null;
   selectedImageFiles: File[] = [];
+  // Validate image file name
   invalidFileNames: string[] = [];
 
   constructor(
@@ -54,9 +57,6 @@ export class AddProductFormComponent {
     });
   }
 
-  // ? AbstractControl: đại diện cho một class base cho các form control, chẳng hạn như input fields, select box và form group. Nó xác định các thuộc tính và phương thức phổ biến mà các form control nên triển khai.
-
-  // ? ValidationErrors: là một cấu trúc giống như từ điển, trong đó mỗi thuộc tính đại diện cho một lỗi xác thực. Tên thuộc tính thường là một chuỗi mô tả lỗi và giá trị có thể là bất kỳ dữ liệu nào (thường là đúng) cho biết sự hiện diện của lỗi.
   validateProductName(control: AbstractControl): ValidationErrors | null {
     // control: đại diện cho các form control đang được xác thực
 
@@ -78,19 +78,16 @@ export class AddProductFormComponent {
       return { duplicate: true }; // và người dùng nên chọn một tên khác.
     }
 
-    const description = control.value;
-    if (description && description.trim() === '') {
-      return { whitespace: true };
-    }
-
     // Trả về là null nếu không có lỗi xác thực
     return null;
   }
 
+  // validate description
   validateDescription(control: AbstractControl): ValidationErrors | null {
     const description = control.value;
     if (description && description.trim() === '') {
-      return { whitespace: true };
+      // Nếu description tồn tại và sau khi loại bỏ khoảng trống description có giá trị là một chuỗi rỗng
+      return { whitespace: true }; // Trả về thuộc tính whitespace: true
     }
     return null;
   }
