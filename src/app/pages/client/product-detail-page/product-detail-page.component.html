@@ -2,11 +2,11 @@
   <div class="pages-container px-[170px]">
     <div>
       <div class="text-[#151515] text-lg font-semibold uppercase mb-[10px]">
-        Product A
+        {{ product?.name }}
       </div>
       <div class="flex items-center gap-x-2 text-[#1c1d1d]">
-        Home <i class="fa-solid fa-chevron-right text-[8px]"></i>
-        Product A
+        Trang chủ <i class="fa-solid fa-chevron-right text-[8px]"></i>
+        {{ product?.name }}
       </div>
     </div>
   </div>
@@ -17,42 +17,30 @@
     <div class="product-images w-[50%] flex-shrink-0">
       <div class="flex">
         <div>
-          <div class="w-[75px] h-[75px] cursor-pointer">
-            <img
-              src="https://cdn.shopify.com/s/files/1/1903/4853/products/z1_2_6dbdaadc-bd0c-454b-b4c1-395b60a2e2a7_1024x1024.jpg?v=1491404782"
-              alt=""
-            />
-          </div>
-          <div class="w-[75px] h-[75px] cursor-pointer">
-            <img
-              src="https://cdn.shopify.com/s/files/1/1903/4853/products/z1_2_6dbdaadc-bd0c-454b-b4c1-395b60a2e2a7_1024x1024.jpg?v=1491404782"
-              alt=""
-            />
-          </div>
-          <div class="w-[75px] h-[75px] cursor-pointer">
-            <img
-              src="https://cdn.shopify.com/s/files/1/1903/4853/products/z1_2_6dbdaadc-bd0c-454b-b4c1-395b60a2e2a7_1024x1024.jpg?v=1491404782"
-              alt=""
-            />
+          <div
+            class="w-[75px] h-[75px] cursor-pointer"
+            *ngFor="let productImage of product?.images"
+          >
+            <img [src]="productImage" alt="" />
           </div>
         </div>
 
         <div
           class="w-[460px] h-[460px] border border-solid border-[#eee] cursor-pointer"
         >
-          <img
-            src="https://cdn.shopify.com/s/files/1/1903/4853/products/z1_2_6dbdaadc-bd0c-454b-b4c1-395b60a2e2a7_1024x1024.jpg?v=1491404782"
-            alt=""
-            class=""
-          />
+          <img [src]="product?.thumb" alt="" class="" />
         </div>
       </div>
     </div>
 
     <div class="product-content w-[50%] flex-1">
-      <h2 class="text-3xl font-semibold uppercase mb-[18px]">Product A</h2>
+      <h2 class="text-3xl font-semibold uppercase mb-[18px]">
+        {{ product?.name }}
+      </h2>
 
-      <span class="text-xl mb-2 inline-block"> 45000 VND </span>
+      <span class="text-xl mb-2 inline-block">
+        {{ product?.price?.toLocaleString() }} VND
+      </span>
       <div class="mb-3">
         <i class="fa fa-star text-[#f1b400]"></i>
         <i class="fa fa-star text-[#f1b400]"></i>
@@ -60,15 +48,12 @@
         <i class="fa fa-star text-[#f1b400]"></i>
         <i class="fa fa-star text-[#f1b400]"></i>
 
-        <span class="pl-2">1 đánh giá</span>
+        <span class="pl-2">10 đánh giá</span>
       </div>
 
       <div class="mb-4">
         <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facilis,
-          culpa consequatur veritatis pariatur quia labore voluptatum ipsa
-          provident hic aliquam saepe sequi, quo nesciunt fugiat officiis
-          voluptatibus nisi amet temporibus!
+          {{ product?.description }}
         </p>
       </div>
 
@@ -132,10 +117,7 @@
 
     <div class="p-5 border border-solid border-[#ebebeb]">
       <p>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facilis, culpa
-        consequatur veritatis pariatur quia labore voluptatum ipsa provident hic
-        aliquam saepe sequi, quo nesciunt fugiat officiis voluptatibus nisi amet
-        temporibus!
+        {{ product?.description }}
       </p>
     </div>
   </div>
@@ -149,35 +131,43 @@
       </div>
     </div>
 
-    <div class="grid grid-cols-4 gap-x-5">
+    <div
+      class="grid grid-cols-4 gap-x-5"
+      *ngIf="relatedProducts && relatedProducts.length > 0"
+    >
       <div
         class="border border-solid border-[#ccc] p-[15px]"
-        key="{product._id}"
+        *ngFor="let relateProduct of relatedProducts"
       >
-        <div class="mb-5">
-          <a routerLink="#">
-            <img
-              src="https://cdn.shopify.com/s/files/1/1903/4853/products/z1_2_6dbdaadc-bd0c-454b-b4c1-395b60a2e2a7_1024x1024.jpg?v=1491404782"
-              alt=""
-            />
-          </a>
-        </div>
-
-        <div>
-          <a
-            routerLink="#"
-            class="text-[#2b3743] text-base mb-[6px] inline-block"
-          >
-            Product A
-          </a>
-          <div class="mb-3 text-[#f1b400] text-xs">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
+        <div class="flex flex-col h-full">
+          <div class="flex-grow-0 w-[250px] h-[250px]">
+            <a routerLink="/products/{{ relateProduct.slug }}">
+              <img
+                [src]="relateProduct.thumb"
+                alt=""
+                class="h-full w-full object-contain"
+              />
+            </a>
           </div>
-          <span class="text-[#2b3743] text-base"> 45000 VND </span>
+
+          <div class="flex-grow">
+            <a
+              routerLink="/products/{{ relateProduct.slug }}"
+              class="text-[#2b3743] text-base mb-[6px] inline-block line-clamp-2"
+            >
+              {{ relateProduct.name }}
+            </a>
+            <div class="mb-3 text-[#f1b400] text-xs">
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+            </div>
+            <span class="text-[#2b3743] text-base">
+              {{ relateProduct?.price?.toLocaleString() }} VND
+            </span>
+          </div>
         </div>
       </div>
     </div>
