@@ -26,8 +26,8 @@ export class ProductService {
     );
   }
 
-  getProductByClient(slug: string): Observable<IProduct> {
-    return this.http.get<IProduct>(
+  getProductByClient(slug: string): Observable<IProductResponse> {
+    return this.http.get<IProductResponse>(
       `http://127.0.0.1:8080/api/products/slug/${slug}`
     );
   }

@@ -7,7 +7,12 @@ export interface ICategory {
   products?: Array<IProduct[]>;
 }
 
-export interface ICategoryResponse {
+export interface ICategoriesResponse {
   success: boolean;
   categories: ICategory[];
+}
+
+export interface ICategoryResponse {
+  success: boolean;
+  productCategory: ICategory;
 }

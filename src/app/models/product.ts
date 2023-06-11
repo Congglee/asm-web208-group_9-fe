@@ -10,13 +10,17 @@ export interface IProduct {
     name: string;
     slug: string;
   };
+  slug?: string;
 }
 
+// Get all product data
 export interface IProductsResponse {
   counts: number;
   products: IProduct[];
   success: boolean;
 }
+
+// Get one product data
 export interface IProductResponse {
   productData: IProduct;
   success: boolean;
