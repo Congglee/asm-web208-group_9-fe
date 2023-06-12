@@ -1,0 +1,63 @@
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+  <div class="flex items-center gap-4 bg-white dark:bg-gray-900 px-6 py-3">
+    <a
+      routerLink="add"
+      class="text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-3 py-2 text-center"
+    >
+      Thêm mới sản phẩm
+    </a>
+
+    <div class="w-full md:w-[35%]">
+      <form
+        class="flex items-center"
+        (ngSubmit)="onFormSubmit(searchInput.value)"
+      >
+        <label for="simple-search" class="sr-only">Search</label>
+        <div class="relative w-full">
+          <div
+            class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
+          >
+            <svg
+              aria-hidden="true"
+              fill="currentColor"
+              viewbox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-5 h-5 text-gray-500 dark:text-gray-400"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+          </div>
+          <input
+            type="text"
+            id="simple-search"
+            placeholder="Tìm kiếm"
+            required=""
+            #searchInput
+            class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+          />
+        </div>
+      </form>
+    </div>
+
+    <select
+      id="small"
+      class="block w-[200px] p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 cursor-pointer"
+      (change)="onSortChange($event)"
+    >
+      <option selected>Sắp xếp theo</option>
+      <option value="name">Theo bảng chữ cái, A-Z</option>
+      <option value="-name">Theo thứ tự bảng chữ cái, Z-A</option>
+      <option value="price">Giá, thấp đến cao</option>
+      <option value="-price">Giá từ cao đến thấp</option>
+    </select>
+  </div>
+
+  <app-product-list-admin
+    [products]="products"
+    (onRemove)="removeProduct($event)"
+  ></app-product-list-admin>
+</div>

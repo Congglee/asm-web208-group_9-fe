@@ -1,18 +1,7 @@
-<section class="bg-gray-50 dark:bg-white">
+<section class="bg-gray-50 dark:bg-gray-900">
   <div
     class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0"
   >
-    <a
-      routerLink=""
-      class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
-    >
-      <img
-        class="w-8 h-8 mr-2"
-        src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
-        alt="logo"
-      />
-      Flowbite
-    </a>
     <div
       class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700"
     >
@@ -20,7 +9,7 @@
         <h1
           class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white"
         >
-          Create and account
+          Tạo tài khoản
         </h1>
         <form
           class="space-y-4 md:space-y-6"
@@ -31,7 +20,7 @@
             <label
               for="name"
               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white abc"
-              >Your name</label
+              >Họ và tên</label
             >
             <input
               type="text"
@@ -42,21 +31,21 @@
               formControlName="name"
             />
             <div
-              class="text-red-600"
+              class="text-red-600 mt-2 font-semibold"
               *ngIf="
                 formSignup.get('name')?.hasError('required') &&
                 (formSignup.get('name')?.touched ||
                   formSignup.get('name')?.dirty)
               "
             >
-              Name is required
+              Tên là bắt buộc
             </div>
           </div>
           <div>
             <label
               for="email"
               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >Your email</label
+              >Email</label
             >
             <input
               type="email"
@@ -67,31 +56,31 @@
               formControlName="email"
             />
             <div
-              class="text-red-600"
+              class="text-red-600 mt-2 font-semibold"
               *ngIf="
                 formSignup.get('email')?.hasError('required') &&
                 (formSignup.get('email')?.touched ||
                   formSignup.get('email')?.dirty)
               "
             >
-              Email is required
+              Email là bắt buộc
             </div>
             <div
-              class="text-red-600"
+              class="text-red-600 mt-2 font-semibold"
               *ngIf="
                 formSignup.get('email')?.hasError('email') &&
                 (formSignup.get('email')?.touched ||
                   formSignup.get('email')?.dirty)
               "
             >
-              Email invalid
+              Email không đúng định dạng
             </div>
           </div>
           <div>
             <label
               for="password"
               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >Password</label
+              >Mật khẩu</label
             >
             <input
               type="password"
@@ -102,30 +91,31 @@
               formControlName="password"
             />
             <div
-              class="text-red-600"
+              class="text-red-600 mt-2 font-semibold"
               *ngIf="
                 formSignup.get('password')?.hasError('required') &&
                 (formSignup.get('password')?.touched ||
                   formSignup.get('password')?.dirty)
               "
             >
-              Password is required
+              Mật khẩu là bắt buộc
             </div>
             <div
+              class="text-red-600 mt-2 font-semibold"
               *ngIf="
                 formSignup.get('password')?.hasError('minlength') &&
                 (formSignup.get('password')?.touched ||
                   formSignup.get('password')?.dirty)
               "
             >
-              Min 6 characters
+              Vui lòng nhập mật khẩu có ít nhất 6 ký tự
             </div>
           </div>
           <div>
             <label
               for="confirmPassword"
               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >Confirm password</label
+              >Xác nhận mật khẩu</label
             >
             <input
               type="password"
@@ -136,14 +126,14 @@
               formControlName="confirmPassword"
             />
             <div
-              class="text-red-600"
+              class="text-red-600 mt-2 font-semibold"
               *ngIf="
                 formSignup?.hasError('notMatch') &&
                 (formSignup.get('confirmPassword')?.touched ||
                   formSignup.get('confirmPassword')?.dirty)
               "
             >
-              Password not same
+              Xác nhận mật khẩu không trùng nhau!
             </div>
           </div>
           <div class="flex items-start">
@@ -160,11 +150,11 @@
               <label
                 for="terms"
                 class="font-light text-gray-500 dark:text-gray-300"
-                >I accept the
+                >Tôi chấp nhận
                 <a
                   class="font-medium text-primary-600 hover:underline dark:text-primary-500"
                   href="#"
-                  >Terms and Conditions</a
+                  >các điều khoản và điều kiện</a
                 ></label
               >
             </div>
@@ -174,14 +164,14 @@
             type="submit"
             class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
           >
-            Create an account
+            Đăng ký
           </button>
           <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-            Already have an account?
+            Đã có tài khoản?
             <a
               routerLink="/sign-in"
-              class="font-medium text-primary-600 hover:underline text-[#ee3131]"
-              >Login here</a
+              class="font-medium text-primary-600 hover:underline"
+              >Đăng nhập</a
             >
           </p>
         </form>

@@ -1,0 +1,56 @@
+<table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+  <thead
+    class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+  >
+    <tr>
+      <th scope="col" class="px-6 py-3">#</th>
+      <th scope="col" class="px-6 py-3">Tên sản phẩm</th>
+      <th scope="col" class="px-6 py-3">Ảnh</th>
+      <th scope="col" class="px-6 py-3">Giá</th>
+      <th scope="col" class="px-6 py-3">Mô tả</th>
+      <th scope="col" class="px-6 py-3">Danh mục</th>
+      <th scope="col" class="px-6 py-3">Thao tác</th>
+    </tr>
+  </thead>
+  <tbody *ngIf="products && products.length > 0">
+    <tr
+      class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+      *ngFor="let product of products; let i = index"
+    >
+      <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
+        {{ i + 1 }}
+      </td>
+      <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
+        {{ product.name }}
+      </td>
+      <td class="w-32 p-4">
+        <img [src]="product.thumb" alt="Apple Watch" />
+      </td>
+      <td class="px-6 py-4">{{ product.price?.toLocaleString() }}</td>
+      <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
+        <p class="line-clamp-4">{{ product.description }}</p>
+      </td>
+      <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
+        {{ product.categoryId?.name }}
+      </td>
+      <td class="px-6 py-4">
+        <div class="flex items-center">
+          <a
+            routerLink="{{ product._id }}/update"
+            class="text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 shadow-lg shadow-lime-500/50 dark:shadow-lg dark:shadow-lime-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+          >
+            Sửa
+          </a>
+
+          <button
+            type="button"
+            class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+            (click)="removeProduct(product._id)"
+          >
+            Xóa
+          </button>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>

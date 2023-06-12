@@ -10,12 +10,19 @@
       </div>
     </div>
 
-    <div class="grid grid-cols-3 gap-x-5">
-      <div class="border border-solid border-[#ccc] p-[15px]">
-        <div class="mb-5">
-          <a routerLink="#">
+    <div
+      class="grid grid-cols-3 gap-x-5"
+      *ngIf="products && products.length > 0"
+    >
+      <div
+        class="border border-solid border-[#ccc] p-[15px]"
+        *ngFor="let product of products.slice().reverse().slice(0, 3)"
+      >
+        <div class="mb-5 w-[345px] h-[345px]">
+          <a routerLink="products/{{ product.slug }}">
             <img
-              src="https://cdn.shopify.com/s/files/1/1903/4853/products/z1_2_8ad649f4-de63-464c-a7d1-7573c1b53a2d_345x550.jpg?v=1491404804"
+              [src]="product.thumb"
+              class="w-full h-full object-contain"
               alt=""
             />
           </a>
@@ -23,10 +30,10 @@
 
         <div>
           <a
-            routerLink="#"
+            routerLink="products/{{ product.slug }}"
             class="text-[#2b3743] text-base mb-[6px] inline-block"
           >
-            Dell Inspiron 7460
+            {{ product.name }}
           </a>
           <div class="mb-3 text-[#f1b400] text-xs">
             <i class="fa fa-star"></i>
@@ -35,63 +42,9 @@
             <i class="fa fa-star"></i>
             <i class="fa fa-star"></i>
           </div>
-          <span class="text-[#2b3743] text-base"> 45000 VND </span>
-        </div>
-      </div>
-
-      <div class="border border-solid border-[#ccc] p-[15px]">
-        <div class="mb-5">
-          <a routerLink="#">
-            <img
-              src="https://cdn.shopify.com/s/files/1/1903/4853/products/z1_2_8ad649f4-de63-464c-a7d1-7573c1b53a2d_345x550.jpg?v=1491404804"
-              alt=""
-            />
-          </a>
-        </div>
-
-        <div>
-          <a
-            routerLink="#"
-            class="text-[#2b3743] text-base mb-[6px] inline-block"
-          >
-            Dell Inspiron 7460
-          </a>
-          <div class="mb-3 text-[#f1b400] text-xs">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-          </div>
-          <span class="text-[#2b3743] text-base"> 45000 VND </span>
-        </div>
-      </div>
-
-      <div class="border border-solid border-[#ccc] p-[15px]">
-        <div class="mb-5">
-          <a routerLink="#">
-            <img
-              src="https://cdn.shopify.com/s/files/1/1903/4853/products/z1_2_8ad649f4-de63-464c-a7d1-7573c1b53a2d_345x550.jpg?v=1491404804"
-              alt=""
-            />
-          </a>
-        </div>
-
-        <div>
-          <a
-            routerLink="#"
-            class="text-[#2b3743] text-base mb-[6px] inline-block"
-          >
-            Dell Inspiron 7460
-          </a>
-          <div class="mb-3 text-[#f1b400] text-xs">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-          </div>
-          <span class="text-[#2b3743] text-base"> 45000 VND </span>
+          <span class="text-[#2b3743] text-base">
+            {{ product.price.toLocaleString() }} VND
+          </span>
         </div>
       </div>
     </div>

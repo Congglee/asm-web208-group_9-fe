@@ -1,1 +1,175 @@
-<p>product-detail-page works!</p>
+<div class="pages bg-[#f7f7f7] py-[15px] mb-[35px]">
+  <div class="pages-container px-[170px]">
+    <div>
+      <div class="text-[#151515] text-lg font-semibold uppercase mb-[10px]">
+        {{ product?.name }}
+      </div>
+      <div class="flex items-center gap-x-2 text-[#1c1d1d]">
+        Trang chủ <i class="fa-solid fa-chevron-right text-[8px]"></i>
+        {{ product?.name }}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="product mb-7">
+  <div class="product-container px-[170px] flex gap-x-[66px]">
+    <div class="product-images w-[50%] flex-shrink-0">
+      <div class="flex">
+        <div>
+          <div
+            class="w-[75px] h-[75px] cursor-pointer"
+            *ngFor="let productImage of product?.images"
+          >
+            <img [src]="productImage" alt="" />
+          </div>
+        </div>
+
+        <div
+          class="w-[460px] h-[460px] border border-solid border-[#eee] cursor-pointer"
+        >
+          <img [src]="product?.thumb" alt="" class="" />
+        </div>
+      </div>
+    </div>
+
+    <div class="product-content w-[50%] flex-1">
+      <h2 class="text-3xl font-semibold uppercase mb-[18px]">
+        {{ product?.name }}
+      </h2>
+
+      <span class="text-xl mb-2 inline-block">
+        {{ product?.price?.toLocaleString() }} VND
+      </span>
+      <div class="mb-3">
+        <i class="fa fa-star text-[#f1b400]"></i>
+        <i class="fa fa-star text-[#f1b400]"></i>
+        <i class="fa fa-star text-[#f1b400]"></i>
+        <i class="fa fa-star text-[#f1b400]"></i>
+        <i class="fa fa-star text-[#f1b400]"></i>
+
+        <span class="pl-2">10 đánh giá</span>
+      </div>
+
+      <div class="mb-4">
+        <p>
+          {{ product?.description }}
+        </p>
+      </div>
+
+      <div class="mb-4">
+        <span class="text-[#151515] font-semibold pr-2"> Số lượng </span>
+        <input
+          type="number"
+          min="0"
+          step="1"
+          value="1"
+          class="pl-2 h-8 w-[120px]"
+        />
+      </div>
+
+      <button
+        class="bg-digital-400 w-full text-white py-[12px] uppercase font-semibold mb-5"
+      >
+        Thêm vào giỏ hàng
+      </button>
+
+      <div class="flex gap-x-[14px]">
+        <div
+          class="w-[35px] h-[35px] flex items-center justify-center bg-black text-white rounded-[50%]"
+        >
+          <i class="fa-brands fa-facebook-f"></i>
+        </div>
+        <div
+          class="w-[35px] h-[35px] flex items-center justify-center bg-black text-white rounded-[50%]"
+        >
+          <i class="fa-brands fa-twitter"></i>
+        </div>
+        <div
+          class="w-[35px] h-[35px] flex items-center justify-center bg-black text-white rounded-[50%]"
+        >
+          <i class="fa-brands fa-pinterest"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="product-desc mb-[30px]">
+  <div class="product-desc-container px-[170px]">
+    <div class="flex gap-x-1">
+      <div class="py-[9px] px-5 bg-[#f1f1f1] cursor-pointer uppercase">
+        Mô tả
+      </div>
+      <div class="py-[9px] px-5 bg-[#f1f1f1] cursor-pointer uppercase">
+        BẢO HÀNH
+      </div>
+      <div class="py-[9px] px-5 bg-[#f1f1f1] cursor-pointer uppercase">
+        VẬN CHUYỂN
+      </div>
+      <div class="py-[9px] px-5 bg-[#f1f1f1] cursor-pointer uppercase">
+        Thanh toán
+      </div>
+      <div class="py-[9px] px-5 bg-[#f1f1f1] cursor-pointer uppercase">
+        PHẢN HỒI KHÁCH HÀNG
+      </div>
+    </div>
+
+    <div class="p-5 border border-solid border-[#ebebeb]">
+      <p>
+        {{ product?.description }}
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="related-products mb-[90px]">
+  <div class="related-products-container px-[170px]">
+    <div class="border-b-2 border-solid border-digital-400 mb-[50px]">
+      <div class="text-lg font-semibold uppercase">
+        CÁC KHÁCH HÀNG KHÁC CŨNG MUA:
+      </div>
+    </div>
+
+    <div
+      class="grid grid-cols-4 gap-x-5"
+      *ngIf="relatedProducts && relatedProducts.length > 0"
+    >
+      <div
+        class="border border-solid border-[#ccc] p-[15px]"
+        *ngFor="let relateProduct of relatedProducts"
+      >
+        <div class="flex flex-col h-full">
+          <div class="flex-grow-0 w-[250px] h-[250px]">
+            <a routerLink="/products/{{ relateProduct.slug }}">
+              <img
+                [src]="relateProduct.thumb"
+                alt=""
+                class="h-full w-full object-contain"
+              />
+            </a>
+          </div>
+
+          <div class="flex-grow">
+            <a
+              routerLink="/products/{{ relateProduct.slug }}"
+              class="text-[#2b3743] text-base mb-[6px] inline-block line-clamp-2"
+            >
+              {{ relateProduct.name }}
+            </a>
+            <div class="mb-3 text-[#f1b400] text-xs">
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+            </div>
+            <span class="text-[#2b3743] text-base">
+              {{ relateProduct?.price?.toLocaleString() }} VND
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
