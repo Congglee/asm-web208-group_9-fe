@@ -18,6 +18,13 @@
 
       <div class="header-auth flex items-center gap-x-2 text-white text-xs">
         <div class="header-auth flex items-center gap-x-2 text-white text-xs">
+          <div class="w-[35px] h-[35px]" *ngIf="userData">
+            <img
+              [src]="userData.avatar"
+              class="w-full h-full object-contain rounded-full"
+              alt=""
+            />
+          </div>
           <div *ngIf="userData && role === true" class="dropdown">
             Hello {{ userData.name }}
             <div class="dropdown-container">

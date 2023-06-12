@@ -78,20 +78,20 @@
         <div class="pl-6 pr-6">HÀNG MỚI VỀ</div>
       </div>
 
-      <div class="flex gap-x-5 mb-5">
-        <div class="px-4 pt-4 pb-6 border border-solid border-[#ccc]">
-          <div class="mb-6">
-            <a routerLink="#">
-              <img
-                src="https://cdn.shopify.com/s/files/1/1903/4853/products/z1_877559ca-7315-44b0-9f7f-f393bd0808bd_345x550.jpg?v=1491404790"
-                alt=""
-              />
+      <div class="flex gap-x-5 mb-5" *ngIf="products && products.length > 0">
+        <div
+          class="px-4 pt-4 pb-6 border border-solid border-[#ccc]"
+          *ngFor="let product of products.slice(0, 3)"
+        >
+          <div class="mb-6 w-[243px] h-[250px]">
+            <a routerLink="products/{{ product.slug }}">
+              <img class="w-full h-full" [src]="product.thumb" alt="" />
             </a>
           </div>
 
           <div>
             <h3 class="text-[#2b3743] text-lg">
-              <a href="#"> Lenovo IdeaPad 110</a>
+              <a routerLink="products/{{ product.slug }}">{{ product.name }}</a>
             </h3>
             <div class="text-[#f1b400] mb-[4px]">
               <i class="fa fa-star"></i>
@@ -100,57 +100,9 @@
               <i class="fa fa-star"></i>
               <i class="fa fa-star"></i>
             </div>
-            <span class="text-[#2b3743] text-base"> 45000 VND </span>
-          </div>
-        </div>
-
-        <div class="px-4 pt-4 pb-6 border border-solid border-[#ccc]">
-          <div class="mb-6">
-            <a routerLink="#">
-              <img
-                src="https://cdn.shopify.com/s/files/1/1903/4853/products/z1_877559ca-7315-44b0-9f7f-f393bd0808bd_345x550.jpg?v=1491404790"
-                alt=""
-              />
-            </a>
-          </div>
-
-          <div>
-            <h3 class="text-[#2b3743] text-lg">
-              <a href="#">Lenovo IdeaPad 110</a>
-            </h3>
-            <div class="text-[#f1b400] mb-[4px]">
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-            </div>
-            <span class="text-[#2b3743] text-base"> 45000 VND </span>
-          </div>
-        </div>
-
-        <div class="px-4 pt-4 pb-6 border border-solid border-[#ccc]">
-          <div class="mb-6">
-            <a routerLink="#">
-              <img
-                src="https://cdn.shopify.com/s/files/1/1903/4853/products/z1_877559ca-7315-44b0-9f7f-f393bd0808bd_345x550.jpg?v=1491404790"
-                alt=""
-              />
-            </a>
-          </div>
-
-          <div>
-            <h3 class="text-[#2b3743] text-lg">
-              <a href="#">Lenovo IdeaPad 110</a>
-            </h3>
-            <div class="text-[#f1b400] mb-[4px]">
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-            </div>
-            <span class="text-[#2b3743] text-base"> 45000 VND </span>
+            <span class="text-[#2b3743] text-base">
+              {{ product.price?.toLocaleString() }}VND
+            </span>
           </div>
         </div>
       </div>

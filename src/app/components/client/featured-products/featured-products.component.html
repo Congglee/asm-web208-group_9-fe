@@ -6,14 +6,18 @@
       SẢN PHẨM NỔI BẬT
     </div>
 
-    <div class="grid grid-cols-3 gap-x-5">
+    <div
+      class="grid grid-cols-3 gap-x-5"
+      *ngIf="products && products.length > 0"
+    >
       <div
         class="flex border border-solid border-[#ccc] py-4 pl-4 gap-x-5 mb-5"
+        *ngFor="let product of products.slice(0, 6)"
       >
         <div class="w-[85px] h-[85px]">
-          <a routerLink="#">
+          <a routerLink="products/{{ product.slug }}">
             <img
-              src="https://cdn.shopify.com/s/files/1/1903/4853/products/z1_2_6dbdaadc-bd0c-454b-b4c1-395b60a2e2a7_345x550.jpg?v=1491404782"
+              [src]="product.thumb"
               alt=""
               class="w-full h-full object-cover"
             />
@@ -21,8 +25,10 @@
         </div>
 
         <div>
-          <a href="#" class="text-[#505050] mb-2 inline-block text-base"
-            >HP ProBook 450
+          <a
+            routerLink="products/{{ product.slug }}"
+            class="text-[#505050] mb-2 inline-block text-base"
+            >{{ product.name }}
           </a>
           <div
             class="text-[#f1b400] text-[10px] flex items-center gap-x-[3px] mb-[9px]"
@@ -33,157 +39,9 @@
             <i class="fa fa-star"></i>
             <i class="fa fa-star"></i>
           </div>
-          <span class="text-[13px]"> 45000 VND </span>
-        </div>
-      </div>
-
-      <div
-        class="flex border border-solid border-[#ccc] py-4 pl-4 gap-x-5 mb-5"
-      >
-        <div class="w-[85px] h-[85px]">
-          <a routerLink="#">
-            <img
-              src="https://cdn.shopify.com/s/files/1/1903/4853/products/z1_2_6dbdaadc-bd0c-454b-b4c1-395b60a2e2a7_345x550.jpg?v=1491404782"
-              alt=""
-              class="w-full h-full object-cover"
-            />
-          </a>
-        </div>
-
-        <div>
-          <a href="#" class="text-[#505050] mb-2 inline-block text-base"
-            >HP ProBook 450
-          </a>
-          <div
-            class="text-[#f1b400] text-[10px] flex items-center gap-x-[3px] mb-[9px]"
-          >
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-          </div>
-          <span class="text-[13px]"> 45000 VND </span>
-        </div>
-      </div>
-
-      <div
-        class="flex border border-solid border-[#ccc] py-4 pl-4 gap-x-5 mb-5"
-      >
-        <div class="w-[85px] h-[85px]">
-          <a routerLink="#">
-            <img
-              src="https://cdn.shopify.com/s/files/1/1903/4853/products/z1_2_6dbdaadc-bd0c-454b-b4c1-395b60a2e2a7_345x550.jpg?v=1491404782"
-              alt=""
-              class="w-full h-full object-cover"
-            />
-          </a>
-        </div>
-
-        <div>
-          <a href="#" class="text-[#505050] mb-2 inline-block text-base"
-            >HP ProBook 450
-          </a>
-          <div
-            class="text-[#f1b400] text-[10px] flex items-center gap-x-[3px] mb-[9px]"
-          >
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-          </div>
-          <span class="text-[13px]"> 45000 VND </span>
-        </div>
-      </div>
-
-      <div
-        class="flex border border-solid border-[#ccc] py-4 pl-4 gap-x-5 mb-5"
-      >
-        <div class="w-[85px] h-[85px]">
-          <a routerLink="#">
-            <img
-              src="https://cdn.shopify.com/s/files/1/1903/4853/products/z1_2_6dbdaadc-bd0c-454b-b4c1-395b60a2e2a7_345x550.jpg?v=1491404782"
-              alt=""
-              class="w-full h-full object-cover"
-            />
-          </a>
-        </div>
-
-        <div>
-          <a href="#" class="text-[#505050] mb-2 inline-block text-base"
-            >HP ProBook 450
-          </a>
-          <div
-            class="text-[#f1b400] text-[10px] flex items-center gap-x-[3px] mb-[9px]"
-          >
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-          </div>
-          <span class="text-[13px]"> 45000 VND </span>
-        </div>
-      </div>
-
-      <div
-        class="flex border border-solid border-[#ccc] py-4 pl-4 gap-x-5 mb-5"
-      >
-        <div class="w-[85px] h-[85px]">
-          <a routerLink="#">
-            <img
-              src="https://cdn.shopify.com/s/files/1/1903/4853/products/z1_2_6dbdaadc-bd0c-454b-b4c1-395b60a2e2a7_345x550.jpg?v=1491404782"
-              alt=""
-              class="w-full h-full object-cover"
-            />
-          </a>
-        </div>
-
-        <div>
-          <a href="#" class="text-[#505050] mb-2 inline-block text-base"
-            >HP ProBook 450
-          </a>
-          <div
-            class="text-[#f1b400] text-[10px] flex items-center gap-x-[3px] mb-[9px]"
-          >
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-          </div>
-          <span class="text-[13px]"> 45000 VND </span>
-        </div>
-      </div>
-
-      <div
-        class="flex border border-solid border-[#ccc] py-4 pl-4 gap-x-5 mb-5"
-      >
-        <div class="w-[85px] h-[85px]">
-          <a routerLink="#">
-            <img
-              src="https://cdn.shopify.com/s/files/1/1903/4853/products/z1_2_6dbdaadc-bd0c-454b-b4c1-395b60a2e2a7_345x550.jpg?v=1491404782"
-              alt=""
-              class="w-full h-full object-cover"
-            />
-          </a>
-        </div>
-
-        <div>
-          <a href="#" class="text-[#505050] mb-2 inline-block text-base"
-            >HP ProBook 450
-          </a>
-          <div
-            class="text-[#f1b400] text-[10px] flex items-center gap-x-[3px] mb-[9px]"
-          >
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-          </div>
-          <span class="text-[13px]"> 45000 VND </span>
+          <span class="text-[13px]">
+            {{ product.price.toLocaleString() }} VND
+          </span>
         </div>
       </div>
     </div>
