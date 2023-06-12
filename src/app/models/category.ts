@@ -1,4 +1,15 @@
-import { IProduct } from './product';
+import { IProductClient, IProduct } from './product';
+export interface ICategoryClient {
+  _id?: string;
+  name: string;
+  slug: string;
+  image: string;
+  products: Array<IProductClient[]>;
+}
+export interface ICategoryResponseClient {
+  success: boolean;
+  categories: ICategoryClient[];
+}
 
 export interface ICategory {
   _id?: string | number;

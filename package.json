@@ -21,6 +21,7 @@
     "@neojp/tailwindcss-line-clamp-utilities": "^1.0.1",
     "@tailwindcss/forms": "^0.5.3",
     "jwt-decode": "^3.1.2",
+    "ngx-pagination": "^6.0.3",
     "ngx-toastr": "^17.0.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

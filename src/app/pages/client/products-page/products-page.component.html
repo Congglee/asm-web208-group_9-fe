@@ -23,48 +23,31 @@
         <div class="col-span-1 bg-white w-full">
           <div class="border-[1px] border-gray-300 mb-[20px]">
             <h1
-              class="bg-[#ee3131] text-white text-[17px] font-semibold p-[14px] uppercase"
+              routerLink="/products"
+              (click)="getProducts()"
+              class="bg-[#ee3131] text-white text-[17px] font-semibold p-[14px] uppercase cursor-pointer"
             >
               Danh mục sản phẩm
             </h1>
-            <ul class="p-[20px] text-[#505050] leading-8">
-              <li>
-                <a routerLink="">
-                  <span class="hover:text-[#ee3131]">
+            <ul
+              class="p-[20px] text-[#505050] leading-8"
+              *ngIf="categories && categories.length"
+            >
+              <li *ngFor="let category of categories" class="cursor-pointer">
+                <a
+                  [routerLink]="['/products']"
+                  [queryParams]="{ categoryId: category._id }"
+                  queryParamsHandling="merge"
+                >
+                  <span
+                    class="hover:text-[#ee3131]"
+                    (click)="getProductFromCategory(category._id)"
+                    *ngIf="category.name !== 'uncategorized'"
+                  >
                     <i
                       class="fa-solid fa-chevron-right text-[10px] mr-[8px]"
                     ></i
-                    >Lenovo
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a routerLink="">
-                  <span class="hover:text-[#ee3131]">
-                    <i
-                      class="fa-solid fa-chevron-right text-[10px] mr-[8px]"
-                    ></i
-                    >Dell
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a routerLink="">
-                  <span class="hover:text-[#ee3131]">
-                    <i
-                      class="fa-solid fa-chevron-right text-[10px] mr-[8px]"
-                    ></i
-                    >MackBook
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a routerLink="">
-                  <span class="hover:text-[#ee3131]">
-                    <i
-                      class="fa-solid fa-chevron-right text-[10px] mr-[8px]"
-                    ></i
-                    >Acer
+                    >{{ category.name }}
                   </span>
                 </a>
               </li>
@@ -76,44 +59,70 @@
             >
               Lọc sản phẩm
             </h1>
+
             <div class="text-[#1a1b18] text-base p-[14px] text-left">
-              <span class="py-2 text-[#505050] font-semibold text-[20px]"
-                >Price</span
-              >
-
-              <form class="px-[5px] border-[1px] border-gray-300">
-                <div class="relative flex items-center w-full my-[10px]">
-                  <span class="px-1 text-[13px]">VND</span>
-                  <input
-                    class="p-3 bg-slate-200"
-                    name="filter.v.price.gte"
-                    value="1.00"
-                    type="number"
-                    placeholder="0"
-                    min="0"
-                    max="100.00"
-                  />
-                  <label class="absolute top-[-4px] left-11 text-[10px]" for=""
-                    >From</label
+              <div class="mb-[15px]">
+                <span class="py-2 text-[#505050] font-semibold text-[20px]"
+                  >Lọc Theo</span
+                >
+                <select
+                  name="sort_by"
+                  class="p-2 w-full"
+                  id="SortBy"
+                  aria-describedby="a11y-refresh-page-message"
+                  (change)="onSortChange($event)"
+                >
+                  <option
+                    *ngFor="let option of sortOptions"
+                    [value]="option.value"
+                    [selected]="option.value === selectedSortOption"
                   >
-                </div>
-                <div class="relative flex items-center w-full my-[10px]">
-                  <span class="px-1 text-[13px]">VND</span>
-                  <input
-                    class="p-2 bg-slate-200"
-                    name="filter.v.price.lte"
-                    value="100.00"
-                    type="number"
-                    placeholder="2000.00"
-                    min="1.00"
-                    max="2000.00"
-                  />
+                    {{ option.label }}
+                  </option>
+                </select>
+              </div>
+              <div>
+                <span class="py-2 text-[#505050] font-semibold text-[20px]"
+                  >Price</span
+                >
+                <form class="px-[5px] border-[1px] border-gray-300">
+                  <div class="relative flex items-center w-full my-[10px]">
+                    <span class="px-1 text-[13px]">VND</span>
+                    <input
+                      class="p-3 bg-slate-200"
+                      name="filter.v.price.gte"
+                      value="1.00"
+                      type="number"
+                      placeholder="0"
+                      min="0"
+                      max="100.00"
+                    />
+                    <label
+                      class="absolute top-[-4px] left-11 text-[10px]"
+                      for=""
+                      >From</label
+                    >
+                  </div>
+                  <div class="relative flex items-center w-full my-[10px]">
+                    <span class="px-1 text-[13px]">VND</span>
+                    <input
+                      class="p-2 bg-slate-200"
+                      name="filter.v.price.lte"
+                      value="100.00"
+                      type="number"
+                      placeholder="2000.00"
+                      min="1.00"
+                      max="2000.00"
+                    />
 
-                  <label class="absolute top-[-4px] left-11 text-[10px]" for=""
-                    >To</label
-                  >
-                </div>
-              </form>
+                    <label
+                      class="absolute top-[-4px] left-11 text-[10px]"
+                      for=""
+                      >To</label
+                    >
+                  </div>
+                </form>
+              </div>
             </div>
 
             <!-- // form -->
@@ -121,410 +130,49 @@
         </div>
         <div class="col-span-4">
           <div class="grid grid-cols-4 gap-4 mb-6">
-            <div class="bg-white p-4 border-[1px] border-gray-300">
-              <div class="product-image">
-                <a routerLink="">
-                  <img
-                    src="https://cdn.shopify.com/s/files/1/1903/4853/products/z1_2_8ad649f4-de63-464c-a7d1-7573c1b53a2d_large.jpg"
-                    alt=""
-                  />
-                </a>
-              </div>
-              <div class="product-content">
-                <div class="my-2">
-                  <a
-                    routerLink="#"
-                    class="block text-[20px] text-[#505050] hover:text-[#ee3131]"
-                    >DELL INSPIRON 7460</a
-                  >
+            <div
+              *ngFor="
+                let product of products
+                  | paginate
+                    : {
+                        itemsPerPage: itemsPerPage,
+                        currentPage: currentPage,
+                        totalItems: totalItems
+                      }
+              "
+            >
+              <div class="bg-white p-4 border-[1px] border-gray-300">
+                <div class="product-image">
+                  <a routerLink="{{ product.slug }}">
+                    <img src="{{ product.thumb }}" alt="{{ product.thumb }}" />
+                  </a>
                 </div>
-                <div class="mb-1">
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                </div>
-                <div class="price text-[#505050] hover:text-[#ee3131]">
-                  <p>21.116.620,59 VND</p>
-                </div>
-              </div>
-            </div>
-            <div class="bg-white p-4 border-[1px] border-gray-300">
-              <div class="product-image">
-                <a routerLink="">
-                  <img
-                    src="https://cdn.shopify.com/s/files/1/1903/4853/products/z1_2_8ad649f4-de63-464c-a7d1-7573c1b53a2d_large.jpg"
-                    alt=""
-                  />
-                </a>
-              </div>
-              <div class="product-content">
-                <div class="my-2">
-                  <a
-                    routerLink="#"
-                    class="block text-[20px] text-[#505050] hover:text-[#ee3131]"
-                    >DELL INSPIRON 7460</a
-                  >
-                </div>
-                <div class="mb-1">
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                </div>
-                <div class="price text-[#505050] hover:text-[#ee3131]">
-                  <p>21.116.620,59 VND</p>
-                </div>
-              </div>
-            </div>
-            <div class="bg-white p-4 border-[1px] border-gray-300">
-              <div class="product-image">
-                <a routerLink="">
-                  <img
-                    src="https://cdn.shopify.com/s/files/1/1903/4853/products/z1_2_8ad649f4-de63-464c-a7d1-7573c1b53a2d_large.jpg"
-                    alt=""
-                  />
-                </a>
-              </div>
-              <div class="product-content">
-                <div class="my-2">
-                  <a
-                    routerLink="#"
-                    class="block text-[20px] text-[#505050] hover:text-[#ee3131]"
-                    >DELL INSPIRON 7460</a
-                  >
-                </div>
-                <div class="mb-1">
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                </div>
-                <div class="price text-[#505050] hover:text-[#ee3131]">
-                  <p>21.116.620,59 VND</p>
-                </div>
-              </div>
-            </div>
-            <div class="bg-white p-4 border-[1px] border-gray-300">
-              <div class="product-image">
-                <a routerLink="">
-                  <img
-                    src="https://cdn.shopify.com/s/files/1/1903/4853/products/z1_2_8ad649f4-de63-464c-a7d1-7573c1b53a2d_large.jpg"
-                    alt=""
-                  />
-                </a>
-              </div>
-              <div class="product-content">
-                <div class="my-2">
-                  <a
-                    routerLink="#"
-                    class="block text-[20px] text-[#505050] hover:text-[#ee3131]"
-                    >DELL INSPIRON 7460</a
-                  >
-                </div>
-                <div class="mb-1">
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                </div>
-                <div class="price text-[#505050] hover:text-[#ee3131]">
-                  <p>21.116.620,59 VND</p>
-                </div>
-              </div>
-            </div>
-            <div class="bg-white p-4 border-[1px] border-gray-300">
-              <div class="product-image">
-                <a routerLink="">
-                  <img
-                    src="https://cdn.shopify.com/s/files/1/1903/4853/products/z1_2_8ad649f4-de63-464c-a7d1-7573c1b53a2d_large.jpg"
-                    alt=""
-                  />
-                </a>
-              </div>
-              <div class="product-content">
-                <div class="my-2">
-                  <a
-                    routerLink="#"
-                    class="block text-[20px] text-[#505050] hover:text-[#ee3131]"
-                    >DELL INSPIRON 7460</a
-                  >
-                </div>
-                <div class="mb-1">
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                </div>
-                <div class="price text-[#505050] hover:text-[#ee3131]">
-                  <p>21.116.620,59 VND</p>
-                </div>
-              </div>
-            </div>
-            <div class="bg-white p-4 border-[1px] border-gray-300">
-              <div class="product-image">
-                <a routerLink="">
-                  <img
-                    src="https://cdn.shopify.com/s/files/1/1903/4853/products/z1_2_8ad649f4-de63-464c-a7d1-7573c1b53a2d_large.jpg"
-                    alt=""
-                  />
-                </a>
-              </div>
-              <div class="product-content">
-                <div class="my-2">
-                  <a
-                    routerLink="#"
-                    class="block text-[20px] text-[#505050] hover:text-[#ee3131]"
-                    >DELL INSPIRON 7460</a
-                  >
-                </div>
-                <div class="mb-1">
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                </div>
-                <div class="price text-[#505050] hover:text-[#ee3131]">
-                  <p>21.116.620,59 VND</p>
-                </div>
-              </div>
-            </div>
-            <div class="bg-white p-4 border-[1px] border-gray-300">
-              <div class="product-image">
-                <a routerLink="">
-                  <img
-                    src="https://cdn.shopify.com/s/files/1/1903/4853/products/z1_2_8ad649f4-de63-464c-a7d1-7573c1b53a2d_large.jpg"
-                    alt=""
-                  />
-                </a>
-              </div>
-              <div class="product-content">
-                <div class="my-2">
-                  <a
-                    routerLink="#"
-                    class="block text-[20px] text-[#505050] hover:text-[#ee3131]"
-                    >DELL INSPIRON 7460</a
-                  >
-                </div>
-                <div class="mb-1">
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                </div>
-                <div class="price text-[#505050] hover:text-[#ee3131]">
-                  <p>21.116.620,59 VND</p>
-                </div>
-              </div>
-            </div>
-            <div class="bg-white p-4 border-[1px] border-gray-300">
-              <div class="product-image">
-                <a routerLink="">
-                  <img
-                    src="https://cdn.shopify.com/s/files/1/1903/4853/products/z1_2_8ad649f4-de63-464c-a7d1-7573c1b53a2d_large.jpg"
-                    alt=""
-                  />
-                </a>
-              </div>
-              <div class="product-content">
-                <div class="my-2">
-                  <a
-                    routerLink="#"
-                    class="block text-[20px] text-[#505050] hover:text-[#ee3131]"
-                    >DELL INSPIRON 7460</a
-                  >
-                </div>
-                <div class="mb-1">
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                </div>
-                <div class="price text-[#505050] hover:text-[#ee3131]">
-                  <p>21.116.620,59 VND</p>
-                </div>
-              </div>
-            </div>
-            <div class="bg-white p-4 border-[1px] border-gray-300">
-              <div class="product-image">
-                <a routerLink="">
-                  <img
-                    src="https://cdn.shopify.com/s/files/1/1903/4853/products/z1_2_8ad649f4-de63-464c-a7d1-7573c1b53a2d_large.jpg"
-                    alt=""
-                  />
-                </a>
-              </div>
-              <div class="product-content">
-                <div class="my-2">
-                  <a
-                    routerLink="#"
-                    class="block text-[20px] text-[#505050] hover:text-[#ee3131]"
-                    >DELL INSPIRON 7460</a
-                  >
-                </div>
-                <div class="mb-1">
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                </div>
-                <div class="price text-[#505050] hover:text-[#ee3131]">
-                  <p>21.116.620,59 VND</p>
-                </div>
-              </div>
-            </div>
-            <div class="bg-white p-4 border-[1px] border-gray-300">
-              <div class="product-image">
-                <a routerLink="">
-                  <img
-                    src="https://cdn.shopify.com/s/files/1/1903/4853/products/z1_2_8ad649f4-de63-464c-a7d1-7573c1b53a2d_large.jpg"
-                    alt=""
-                  />
-                </a>
-              </div>
-              <div class="product-content">
-                <div class="my-2">
-                  <a
-                    routerLink="#"
-                    class="block text-[20px] text-[#505050] hover:text-[#ee3131]"
-                    >DELL INSPIRON 7460</a
-                  >
-                </div>
-                <div class="mb-1">
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                </div>
-                <div class="price text-[#505050] hover:text-[#ee3131]">
-                  <p>21.116.620,59 VND</p>
-                </div>
-              </div>
-            </div>
-            <div class="bg-white p-4 border-[1px] border-gray-300">
-              <div class="product-image">
-                <a routerLink="">
-                  <img
-                    src="https://cdn.shopify.com/s/files/1/1903/4853/products/z1_2_8ad649f4-de63-464c-a7d1-7573c1b53a2d_large.jpg"
-                    alt=""
-                  />
-                </a>
-              </div>
-              <div class="product-content">
-                <div class="my-2">
-                  <a
-                    routerLink="#"
-                    class="block text-[20px] text-[#505050] hover:text-[#ee3131]"
-                    >DELL INSPIRON 7460</a
-                  >
-                </div>
-                <div class="mb-1">
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                </div>
-                <div class="price text-[#505050] hover:text-[#ee3131]">
-                  <p>21.116.620,59 VND</p>
-                </div>
-              </div>
-            </div>
-            <div class="bg-white p-4 border-[1px] border-gray-300">
-              <div class="product-image">
-                <a routerLink="">
-                  <img
-                    src="https://cdn.shopify.com/s/files/1/1903/4853/products/z1_2_8ad649f4-de63-464c-a7d1-7573c1b53a2d_large.jpg"
-                    alt=""
-                  />
-                </a>
-              </div>
-              <div class="product-content">
-                <div class="my-2">
-                  <a
-                    routerLink="#"
-                    class="block text-[20px] text-[#505050] hover:text-[#ee3131]"
-                    >DELL INSPIRON 7460</a
-                  >
-                </div>
-                <div class="mb-1">
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                  <i class="fas fa-star text-yellow-500"></i>
-                </div>
-                <div class="price text-[#505050] hover:text-[#ee3131]">
-                  <p>21.116.620,59 VND</p>
+                <div class="product-content">
+                  <div class="my-2">
+                    <a
+                      routerLink="{{ product.slug }}"
+                      class="block text-[18px] text-[#505050] hover:text-[#ee3131]"
+                      >{{ product.name }}</a
+                    >
+                  </div>
+                  <div class="mb-1">
+                    <i class="fas fa-star text-yellow-500"></i>
+                    <i class="fas fa-star text-yellow-500"></i>
+                    <i class="fas fa-star text-yellow-500"></i>
+                    <i class="fas fa-star text-yellow-500"></i>
+                    <i class="fas fa-star text-yellow-500"></i>
+                  </div>
+                  <div class="price text-[#505050] hover:text-[#ee3131]">
+                    <p>{{ product.price }}</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-
-          <div class="mx-auto">
-            <ul class="flex -space-x-px">
-              <li>
-                <a
-                  href="#"
-                  class="px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700"
-                  >Previous</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  aria-current="page"
-                  class="px-3 py-2 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
-                  >1</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-                  >2</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-                  >3</a
-                >
-              </li>
-
-              <li>
-                <a
-                  href="#"
-                  class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-                  >4</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-                  >5</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700"
-                  >Next</a
-                >
-              </li>
-            </ul>
+          <div class="flex items-center justify-center w-full mt-5">
+            <pagination-controls
+              (pageChange)="onPageChange($event)"
+            ></pagination-controls>
           </div>
         </div>
       </div>

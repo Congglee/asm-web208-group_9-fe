@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -94,6 +95,7 @@ import { UpdateCategoryFormComponent } from './components/admin/update-category-
       titleClass: 'toast-title',
       messageClass: 'toast-message',
     }),
+    NgxPaginationModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

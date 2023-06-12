@@ -1,21 +1,27 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import {
   ICategoriesResponse,
   ICategory,
   ICategoryResponse,
-} from 'src/app/models/category';
+  ICategoryResponseClient,
+} from './../../models/category';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CategoryService {
+  Api: string = 'http://localhost:8080/api/categories';
   constructor(private http: HttpClient) {}
 
   private getHeaders(): HttpHeaders {
     const accessToken = localStorage.getItem('accessToken');
     return new HttpHeaders().set('Authorization', `Bearer ${accessToken}`);
+  }
+
+  getAllCategories(): Observable<ICategoryResponseClient> {
+    return this.http.get<ICategoryResponseClient>(`${this.Api}`);
   }
 
   getCategories(): Observable<ICategoriesResponse> {
