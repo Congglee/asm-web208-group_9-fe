@@ -9,58 +9,24 @@
       </div>
 
       <div class="banner-aside-list border border-solid border-[#ccc]">
-        <div class="banner-aside-item flex items-center py-[15px] px-[20px]">
-          <img
-            src="https://cdn.shopify.com/s/files/1/1903/4853/t/26/assets/laptop.png?v=60805008396908785021628340873"
-            alt=""
-            class="w-5"
-          />
-          <a routerLink="#" class="pl-[9px]"> Asus </a>
-        </div>
-
-        <div class="banner-aside-item flex items-center py-[15px] px-[20px]">
-          <img
-            src="https://cdn.shopify.com/s/files/1/1903/4853/t/26/assets/laptop.png?v=60805008396908785021628340873"
-            alt=""
-            class="w-5"
-          />
-          <a routerLink="#" class="pl-[9px]"> Acer </a>
-        </div>
-
-        <div class="banner-aside-item flex items-center py-[15px] px-[20px]">
-          <img
-            src="https://cdn.shopify.com/s/files/1/1903/4853/t/26/assets/laptop.png?v=60805008396908785021628340873"
-            alt=""
-            class="w-5"
-          />
-          <a routerLink="#" class="pl-[9px]"> Dell </a>
-        </div>
-
-        <div class="banner-aside-item flex items-center py-[15px] px-[20px]">
-          <img
-            src="https://cdn.shopify.com/s/files/1/1903/4853/t/26/assets/laptop.png?v=60805008396908785021628340873"
-            alt=""
-            class="w-5"
-          />
-          <a routerLink="#" class="pl-[9px]"> HP </a>
-        </div>
-
-        <div class="banner-aside-item flex items-center py-[15px] px-[20px]">
-          <img
-            src="https://cdn.shopify.com/s/files/1/1903/4853/t/26/assets/laptop.png?v=60805008396908785021628340873"
-            alt=""
-            class="w-5"
-          />
-          <a routerLink="#" class="pl-[9px]"> Lenovo </a>
-        </div>
-
-        <div class="banner-aside-item flex items-center py-[15px] px-[20px]">
-          <img
-            src="https://cdn.shopify.com/s/files/1/1903/4853/t/26/assets/laptop.png?v=60805008396908785021628340873"
-            alt=""
-            class="w-5"
-          />
-          <a routerLink="#" class="pl-[9px]"> Macbook </a>
+        <div *ngFor="let category of categories">
+          <div
+            class="banner-aside-item flex items-center py-[15px] px-[20px]"
+            *ngIf="category.name !== 'uncategorized'"
+          >
+            <img
+              src="https://cdn.shopify.com/s/files/1/1903/4853/t/26/assets/laptop.png?v=60805008396908785021628340873"
+              alt=""
+              class="w-5"
+            />
+            <a
+              [routerLink]="['/products']"
+              [queryParams]="{ categoryId: category._id }"
+              class="pl-[9px]"
+            >
+              {{ category.name }}
+            </a>
+          </div>
         </div>
       </div>
     </div>
