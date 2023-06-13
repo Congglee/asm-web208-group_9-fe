@@ -40,6 +40,8 @@ import { UpdateCategoryPageComponent } from './pages/admin/category/update-categ
 import { CategoryListAdminComponent } from './components/admin/category-list-admin/category-list-admin.component';
 import { AddCategoryFormComponent } from './components/admin/add-category-form/add-category-form.component';
 import { UpdateCategoryFormComponent } from './components/admin/update-category-form/update-category-form.component';
+import { UpdateUserInfoFormComponent } from './components/client/update-user-info-form/update-user-info-form.component';
+import { UpdateUserInfoPageComponent } from './pages/client/update-user-info-page/update-user-info-page.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +78,8 @@ import { UpdateCategoryFormComponent } from './components/admin/update-category-
     CategoryListAdminComponent,
     AddCategoryFormComponent,
     UpdateCategoryFormComponent,
+    UpdateUserInfoFormComponent,
+    UpdateUserInfoPageComponent,
   ],
   imports: [
     BrowserModule,
