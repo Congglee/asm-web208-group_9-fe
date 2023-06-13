@@ -38,7 +38,9 @@
                   <div
                     class="dropdown-item mb-[10px] text-[#505050] text-xs hover:text-digital-400 border-b-2 border-solid border-[#d3d3d3] pb-2"
                   >
-                    Tài khoản
+                    <a [routerLink]="['user', userData._id, 'update']"
+                      >Tài khoản</a
+                    >
                   </div>
                   <div
                     class="dropdown-item mb-[10px] text-[#505050] text-xs hover:text-digital-400 border-b-2 border-solid border-[#d3d3d3] pb-2"
