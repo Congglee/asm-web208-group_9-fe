@@ -14,6 +14,7 @@ import { SigninPageComponent } from './pages/client/signin-page/signin-page.comp
 import { ManageCategoryComponent } from './pages/admin/category/manage-category/manage-category.component';
 import { AddCategoryPageComponent } from './pages/admin/category/add-category-page/add-category-page.component';
 import { UpdateCategoryPageComponent } from './pages/admin/category/update-category-page/update-category-page.component';
+import { UpdateUserInfoPageComponent } from './pages/client/update-user-info-page/update-user-info-page.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,7 @@ const routes: Routes = [
       { path: 'products/category/:id', component: ProductsPageComponent },
       { path: 'sign-up', component: RegisterPageComponent },
       { path: 'sign-in', component: SigninPageComponent },
+      { path: 'user/:id/update', component: UpdateUserInfoPageComponent },
     ],
   },
 
