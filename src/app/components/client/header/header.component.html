@@ -1,0 +1,265 @@
+<header class="header">
+  <div class="header-topbar bg-digital-400 mb-[35px]">
+    <div
+      class="header-topbar-container px-[170px] py-2.5 flex justify-between items-center"
+    >
+      <div class="header-order-online text-white flex text-xs">
+        <div class="border-r border-solid border-[#ccc] pr-2">
+          <span>
+            ĐẶT HÀNG TRỰC TUYẾN HOẶC GỌI CHO CHÚNG TÔI (+1800) 000 8808
+          </span>
+        </div>
+
+        <div class="pl-2 cursor-pointer">
+          <span> VND </span>
+          <i class="fa-sharp fa-solid fa-chevron-down"></i>
+        </div>
+      </div>
+
+      <div class="header-auth flex items-center gap-x-2 text-white text-xs">
+        <div class="header-auth flex items-center gap-x-2 text-white text-xs">
+          <div class="w-[35px] h-[35px]" *ngIf="userData">
+            <img
+              [src]="userData.avatar"
+              class="w-full h-full object-contain rounded-full"
+              alt=""
+            />
+          </div>
+          <div *ngIf="userData && role === true" class="dropdown">
+            Hello {{ userData.name }}
+            <div class="dropdown-container">
+              <div class="dropdown-col">
+                <div class="dropdown-list">
+                  <div
+                    class="dropdown-item mb-[10px] text-[#505050] text-xs hover:text-digital-400 border-b-2 border-solid border-[#d3d3d3] pb-2"
+                  >
+                    <a routerLink="/admin">Quản trị Admin</a>
+                  </div>
+                  <div
+                    class="dropdown-item mb-[10px] text-[#505050] text-xs hover:text-digital-400 border-b-2 border-solid border-[#d3d3d3] pb-2"
+                  >
+                    <a [routerLink]="['user', userData._id, 'update']"
+                      >Tài khoản</a
+                    >
+                  </div>
+                  <div
+                    class="dropdown-item mb-[10px] text-[#505050] text-xs hover:text-digital-400 border-b-2 border-solid border-[#d3d3d3] pb-2"
+                  >
+                    Giỏ hàng
+                  </div>
+                  <div
+                    class="dropdown-item mb-[10px] text-[#505050] text-xs hover:text-digital-400 border-b-2 border-solid border-[#d3d3d3] pb-2"
+                  >
+                    Hóa đơn
+                  </div>
+                  <div
+                    class="dropdown-item mb-[10px] text-[#505050] text-xs hover:text-digital-400"
+                    (click)="onHandleLogOut()"
+                  >
+                    Đăng xuất
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="userData && role === false" class="dropdown">
+            Hello {{ userData.name }}
+            <div class="dropdown-container">
+              <div class="dropdown-col">
+                <div class="dropdown-list">
+                  <div
+                    class="dropdown-item mb-[10px] text-[#505050] text-xs hover:text-digital-400 border-b-2 border-solid border-[#d3d3d3] pb-2"
+                  >
+                    <a [routerLink]="['user', userData._id, 'update']"
+                      >Tài khoản</a
+                    >
+                  </div>
+                  <div
+                    class="dropdown-item mb-[10px] text-[#505050] text-xs hover:text-digital-400 border-b-2 border-solid border-[#d3d3d3] pb-2"
+                  >
+                    Giỏ hàng
+                  </div>
+                  <div
+                    class="dropdown-item mb-[10px] text-[#505050] text-xs hover:text-digital-400 border-b-2 border-solid border-[#d3d3d3] pb-2"
+                  >
+                    Hóa đơn
+                  </div>
+                  <div
+                    class="dropdown-item mb-[10px] text-[#505050] text-xs hover:text-digital-400"
+                    (click)="onHandleLogOut()"
+                  >
+                    Đăng Xuất
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="!userData || role === undefined" class="dropdown">
+            <a class="pr-2" routerLink="/sign-in">Đăng nhập</a>
+            <a
+              routerLink="/sign-up"
+              class="border-l border-solid border-[#ccc] pl-3"
+              >Tạo tài khoản</a
+            >
+          </div>
+        </div>
+
+        <!-- <a routerLink="sign-in">Đăng nhập hoặc </a>
+        <a routerLink="sign-up">Tạo tài khoản</a> -->
+
+        <div class="header-socials flex items-center">
+          <div class="border-l border-solid border-[#ccc] pl-3 pr-3">
+            <i class="fa-brands fa-facebook-f"></i>
+          </div>
+          <div class="border-l border-solid border-[#ccc] pl-3 pr-3">
+            <i class="fa-brands fa-twitter"></i>
+          </div>
+          <div class="border-l border-solid border-[#ccc] pl-3 pr-3">
+            <i class="fa-brands fa-instagram"></i>
+          </div>
+          <div class="border-l border-solid border-[#ccc] pl-3 pr-3">
+            <i class="fa-brands fa-google"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="header-container px-[170px]">
+    <div class="header-content flex justify-between items-center mb-[45px]">
+      <div class="header-logo">
+        <a routerLink="#">
+          <img
+            src="https://cdn.shopify.com/s/files/1/1903/4853/files/logo_digital_new_250x.png?v=1613166683"
+            alt=""
+          />
+        </a>
+      </div>
+
+      <div class="header-infors flex gap-6">
+        <div class="border-r border-solid border-[#ccc] pr-6 text-center">
+          <div class="text-[13px]">
+            <i class="fa-solid fa-phone text-digital-400 pr-2.5"></i>
+            <span class="font-semibold"> (+1800) 000 8808</span>
+          </div>
+          <div class="text-[#505050] text-xs">
+            Thứ hai - Thứ bảy 9:00AM - 8:00PM
+          </div>
+        </div>
+
+        <div class="border-r border-solid border-[#ccc] pr-6 text-center">
+          <div class="text-[13px]">
+            <i class="fa-solid fa-envelope text-digital-400 pr-2.5"></i>
+            <span class="font-semibold"> SUPPORT@TADATHEMES.COM</span>
+          </div>
+          <div class="text-[#505050] text-xs">Hỗ trợ trực tuyến 24/7</div>
+        </div>
+
+        <div class="border-r border-solid border-[#ccc] pr-6">
+          <div
+            class="flex items-center justify-center h-10 text-xl text-digital-400"
+          >
+            <i class="fa-regular fa-heart"></i>
+          </div>
+        </div>
+
+        <div>
+          <div class="h-10 flex items-center justify-center gap-2">
+            <i class="fa fa-shopping-bag text-xl text-digital-400"></i>
+            <span>1 sản phẩm</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="header-nav flex justify-between items-center border-y-2 border-solid border-[#eee] py-3"
+    >
+      <ul class="header-menu flex gap-x-[30px]">
+        <li>
+          <a routerLink="" class="uppercase pr-2">Trang chủ</a>
+          <i class="fa-solid fa-caret-down"></i>
+        </li>
+        <li>
+          <div class="dropdown-menu">
+            <a routerLink="/products" class="uppercase pr-2">Sản phẩm</a
+            ><i class="fa-solid fa-caret-down"></i>
+
+            <div class="dropdown-menu-container">
+              <div class="dropdown-menu-image">
+                <img
+                  src="https://cdn.shopify.com/s/files/1/1636/8779/articles/blog4_345x.jpg"
+                  alt=""
+                  class="mb-2"
+                />
+                <p>
+                  Lorem ipsum dolor sit amet, quod fabellas hendrerit per eu,
+                  mea populo epicuri et, ea possim numquam mea.
+                </p>
+              </div>
+
+              <div class="dropdown-menu-col">
+                <h2 class="text-[#505050] text-lg font-semibold uppercase mb-5">
+                  Laptop
+                </h2>
+                <div class="dropdown-menu-list">
+                  <div
+                    class="dropdown-menu-item mb-[10px] text-[#505050] text-sm hover:text-digital-400"
+                  >
+                    Acer
+                  </div>
+                  <div
+                    class="dropdown-menu-item mb-[10px] text-[#505050] text-sm hover:text-digital-400"
+                  >
+                    Asus
+                  </div>
+                  <div
+                    class="dropdown-menu-item mb-[10px] text-[#505050] text-sm hover:text-digital-400"
+                  >
+                    Dell
+                  </div>
+                  <div
+                    class="dropdown-menu-item mb-[10px] text-[#505050] text-sm hover:text-digital-400"
+                  >
+                    HP
+                  </div>
+                  <div
+                    class="dropdown-menu-item mb-[10px] text-[#505050] text-sm hover:text-digital-400"
+                  >
+                    Lenovo
+                  </div>
+                  <div
+                    class="dropdown-menu-item mb-[10px] text-[#505050] text-sm hover:text-digital-400"
+                  >
+                    Macbook
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <a routerLink="#" class="uppercase pr-2">Blogs</a
+          ><i class="fa-solid fa-caret-down"></i>
+        </li>
+        <li>
+          <a routerLink="#" class="uppercase pr-2">Giới thiệu</a
+          ><i class="fa-solid fa-caret-down"></i>
+        </li>
+        <li>
+          <a routerLink="#" class="uppercase pr-2">Liên hệ</a
+          ><i class="fa-solid fa-caret-down"></i>
+        </li>
+      </ul>
+
+      <form action="">
+        <input
+          type="text"
+          class="outline-none"
+          placeholder="Tìm kiếm thứ gì đó ..."
+        />
+        <button>Tìm kiếm</button>
+      </form>
+    </div>
+  </div>
+</header>

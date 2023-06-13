@@ -1,0 +1,41 @@
+<div class="banner mb-[30px] mt-5">
+  <div class="banner-container px-[170px] flex gap-x-5 justify-between">
+    <div class="banner-aside w-[25%] flex-1">
+      <div
+        class="banner-aside-title py-[10px] px-5 bg-digital-400 text-white text-base"
+      >
+        <i class="fa fa-list"></i>
+        <span class="pl-[14px] uppercase font-semibold"> Tất cả danh mục </span>
+      </div>
+
+      <div class="banner-aside-list border border-solid border-[#ccc]">
+        <div *ngFor="let category of categories">
+          <div
+            class="banner-aside-item flex items-center py-[15px] px-[20px]"
+            *ngIf="category.name !== 'uncategorized'"
+          >
+            <img
+              src="https://cdn.shopify.com/s/files/1/1903/4853/t/26/assets/laptop.png?v=60805008396908785021628340873"
+              alt=""
+              class="w-5"
+            />
+            <a
+              [routerLink]="['/products']"
+              [queryParams]="{ categoryId: category._id }"
+              class="pl-[9px]"
+            >
+              {{ category.name }}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="banner-slider w-[75%] flex-shrink-0">
+      <img
+        src="https://i.pinimg.com/originals/c7/28/58/c72858992482c70d5ec3a585eec352ed.png"
+        alt=""
+      />
+    </div>
+  </div>
+</div>

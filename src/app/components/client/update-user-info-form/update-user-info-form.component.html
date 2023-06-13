@@ -1,0 +1,115 @@
+<form
+  action="#"
+  class="mt-8 grid grid-cols-6 gap-6"
+  [formGroup]="userForm"
+  (ngSubmit)="onHandleUpdateUser()"
+>
+  <div class="col-span-6">
+    <label for="" class="block text-sm font-medium text-gray-700"> Name </label>
+
+    <input
+      type="text"
+      id=""
+      name=""
+      class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+      formControlName="name"
+    />
+    <div
+      class="text-red-600 mt-2 font-semibold"
+      *ngIf="
+        userForm.get('name')?.hasError('required') &&
+        (userForm.get('name')?.touched || userForm.get('name')?.dirty)
+      "
+    >
+      Tên là bắt buộc
+    </div>
+  </div>
+
+  <div class="col-span-6">
+    <label for="Email" class="block text-sm font-medium text-gray-700">
+      Email
+    </label>
+
+    <input
+      type="email"
+      id="Email"
+      name="email"
+      class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+      formControlName="email"
+    />
+    <div
+      class="text-red-600 mt-2 font-semibold"
+      *ngIf="
+        userForm.get('email')?.hasError('required') &&
+        (userForm.get('email')?.touched || userForm.get('email')?.dirty)
+      "
+    >
+      Email là bắt buộc
+    </div>
+    <div
+      class="text-red-600 mt-2 font-semibold"
+      *ngIf="
+        userForm.get('email')?.hasError('email') &&
+        (userForm.get('email')?.touched || userForm.get('email')?.dirty)
+      "
+    >
+      Email không đúng định dạng
+    </div>
+
+    <div
+      class="mt-2"
+      *ngIf="
+        userForm.get('email')?.invalid &&
+        (userForm.get('email')?.dirty || userForm.get('email')?.touched)
+      "
+    >
+      <span *ngIf="userForm.get('email')?.errors?.['required']">
+        <span class="text-base text-red-600 font-semibold"
+          >Email là bắt buộc</span
+        >
+      </span>
+      <span *ngIf="userForm.get('email')?.errors?.['duplicate']">
+        <span class="text-base text-red-600 font-semibold"
+          >Email đã tồn tại. Vui lòng nhập email khác.</span
+        >
+      </span>
+    </div>
+  </div>
+
+  <div class="col-span-6">
+    <label for="" class="block text-sm font-medium text-gray-700">
+      Avatar
+    </label>
+
+    <input
+      type="file"
+      id=""
+      name=""
+      class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+      formControlName="avatar"
+      (change)="onSelectAvatar($event)"
+    />
+
+    <div class="w-[150px] h-[150px] mb-16">
+      <img
+        class="h-auto w-full object-contain mt-4"
+        [src]="user?.avatar"
+        alt=""
+      />
+    </div>
+  </div>
+
+  <div *ngIf="showSuccessMsg" class="mt-2 col-span-12">
+    <span class="text-xl font-bold text-green-500"
+      >Cập nhật thông tin tài khoản thành công</span
+    >
+  </div>
+
+  <div class="col-span-6 sm:flex sm:items-center sm:gap-4 mt-4">
+    <button
+      class="inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500"
+    >
+      Cập nhật thông tin
+    </button>
+  </div>
+</form>

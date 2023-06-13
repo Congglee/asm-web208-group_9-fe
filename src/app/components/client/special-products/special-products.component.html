@@ -1,0 +1,129 @@
+<div class="special-products mb-5">
+  <div class="special-products-container px-[170px] flex gap-x-5">
+    <div
+      class="specials-products-deals w-[25%] flex-1 border border-solid border-[#ccc] p-3"
+    >
+      <div class="text-xl mb-[50px]">
+        <i class="fa fa-star text-digital-400"></i>
+        <span class="uppercase text-[#505050] font-semibold pl-2">
+          ƯU ĐÃI HÀNG NGÀY
+        </span>
+      </div>
+
+      <div>
+        <div class="mb-5">
+          <a href="#">
+            <img
+              src="	https://cdn.shopify.com/s/files/1/1903/4853/products/Untitled-189_400x.jpg?v=1491404918"
+              alt=""
+            />
+          </a>
+        </div>
+
+        <div class="text-center mb-[15px]">
+          <h3 class="mb-2 text-[#505050] text-base">
+            <a href="#">MorouterLinkrola MorouterLink 360 (2nd gen)</a>
+          </h3>
+          <div
+            class="mb-3 text-[#f1b400] text-sm flex gap-x-[2px] justify-center"
+          >
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+          </div>
+          <span class="text-black text-base uppercase"> 8.213.394,79 VND </span>
+        </div>
+
+        <div class="flex gap-x-[4px] justify-center mb-[15px]">
+          <div
+            class="w-[80px] h-[63px] flex flex-col items-center justify-center bg-[#ebebeb]"
+          >
+            <span class="text-[#151515] text-lg font-semibold"> 0 </span>
+            <span class="text-xs text-[#8b8b8b]">Giờ</span>
+          </div>
+
+          <div
+            class="w-[80px] h-[63px] flex flex-col items-center bg-[#ebebeb] justify-center"
+          >
+            <span class="text-[#151515] text-lg font-semibold"> 0 </span>
+            <span class="text-xs text-[#8b8b8b]">Phút</span>
+          </div>
+
+          <div
+            class="w-[80px] h-[63px] flex flex-col items-center bg-[#ebebeb] justify-center"
+          >
+            <span class="text-[#151515] text-lg font-semibold"> 0 </span>
+            <span class="text-xs text-[#8b8b8b]">Giây</span>
+          </div>
+        </div>
+
+        <div
+          class="text-center py-[11px] px-[15px] bg-digital-400 text-white uppercase cursor-pointer"
+        >
+          <i class="fa fa-bars"></i>
+          <span class="pl-2">TÙY CHỌN</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="special-products-main w-[75%] flex-shrink-0">
+      <div
+        class="flex border-b-2 border-solid border-digital-400 pb-[17px] mb-5 font-semibold uppercase text-xl"
+      >
+        <div class="border-r border-solid border-[#ccc] pr-6 text-[#151515]">
+          BÁN CHẠY NHẤT
+        </div>
+        <div class="pl-6 pr-6">HÀNG MỚI VỀ</div>
+      </div>
+
+      <div class="flex gap-x-5 mb-5" *ngIf="products && products.length > 0">
+        <div
+          class="px-4 pt-4 pb-6 border border-solid border-[#ccc]"
+          *ngFor="let product of products.slice(0, 3)"
+        >
+          <div class="mb-6 w-[243px] h-[250px]">
+            <a routerLink="products/{{ product.slug }}">
+              <img class="w-full h-full" [src]="product.thumb" alt="" />
+            </a>
+          </div>
+
+          <div>
+            <h3 class="text-[#2b3743] text-lg">
+              <a routerLink="products/{{ product.slug }}">{{ product.name }}</a>
+            </h3>
+            <div class="text-[#f1b400] mb-[4px]">
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+            </div>
+            <span class="text-[#2b3743] text-base">
+              {{ product.price?.toLocaleString() }}VND
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-row gap-x-5">
+        <a href="#" class="basis-1/2">
+          <img
+            src="https://cdn.shopify.com/s/files/1/1903/4853/files/banner2-home2_2000x_crop_center.png?v=1613166657"
+            alt=""
+            class="w-full h-full"
+          />
+        </a>
+
+        <a href="#" class="basis-1/2">
+          <img
+            src="https://cdn.shopify.com/s/files/1/1903/4853/files/banner1-home2_2000x_crop_center.png?v=1613166657"
+            alt=""
+            class="w-full h-full"
+          />
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

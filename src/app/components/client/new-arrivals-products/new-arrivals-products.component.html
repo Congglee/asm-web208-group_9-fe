@@ -1,0 +1,52 @@
+<div class="new-arrivals mb-5">
+  <div class="new-arrivals-container px-[170px]">
+    <div
+      class="flex flex-row justify-between items-center border-b-2 border-solid border-digital-400 pb-3 mb-5"
+    >
+      <div class="text-xl font-semibold uppercase">HÀNG MỚI VỀ</div>
+
+      <div class="flex items-center gap-x-[45px]">
+        <a href="#">Xem tất cả</a>
+      </div>
+    </div>
+
+    <div
+      class="grid grid-cols-3 gap-x-5"
+      *ngIf="products && products.length > 0"
+    >
+      <div
+        class="border border-solid border-[#ccc] p-[15px]"
+        *ngFor="let product of products.slice().reverse().slice(0, 3)"
+      >
+        <div class="mb-5 w-[345px] h-[345px]">
+          <a routerLink="products/{{ product.slug }}">
+            <img
+              [src]="product.thumb"
+              class="w-full h-full object-contain"
+              alt=""
+            />
+          </a>
+        </div>
+
+        <div>
+          <a
+            routerLink="products/{{ product.slug }}"
+            class="text-[#2b3743] text-base mb-[6px] inline-block"
+          >
+            {{ product.name }}
+          </a>
+          <div class="mb-3 text-[#f1b400] text-xs">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+          </div>
+          <span class="text-[#2b3743] text-base">
+            {{ product.price.toLocaleString() }} VND
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

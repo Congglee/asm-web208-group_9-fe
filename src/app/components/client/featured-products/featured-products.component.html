@@ -1,0 +1,49 @@
+<div class="featured-products">
+  <div class="featured-products-container px-[170px]">
+    <div
+      class="mb-5 text-xl font-semibold uppercase border-b-2 border-solid border-digital-400 pb-3"
+    >
+      SẢN PHẨM NỔI BẬT
+    </div>
+
+    <div
+      class="grid grid-cols-3 gap-x-5"
+      *ngIf="products && products.length > 0"
+    >
+      <div
+        class="flex border border-solid border-[#ccc] py-4 pl-4 gap-x-5 mb-5"
+        *ngFor="let product of products.slice(0, 6)"
+      >
+        <div class="w-[85px] h-[85px]">
+          <a routerLink="products/{{ product.slug }}">
+            <img
+              [src]="product.thumb"
+              alt=""
+              class="w-full h-full object-cover"
+            />
+          </a>
+        </div>
+
+        <div>
+          <a
+            routerLink="products/{{ product.slug }}"
+            class="text-[#505050] mb-2 inline-block text-base"
+            >{{ product.name }}
+          </a>
+          <div
+            class="text-[#f1b400] text-[10px] flex items-center gap-x-[3px] mb-[9px]"
+          >
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+          </div>
+          <span class="text-[13px]">
+            {{ product.price.toLocaleString() }} VND
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
