@@ -36,8 +36,15 @@ export class UpdateUserInfoFormComponent {
     });
 
     this.userForm = this.formBuilder.group({
-      name: [''],
-      email: ['', [Validators.required, this.validateUserEmail.bind(this)]],
+      name: ['', [Validators.required]],
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.email,
+          this.validateUserEmail.bind(this),
+        ],
+      ],
       avatar: [''],
     });
 
