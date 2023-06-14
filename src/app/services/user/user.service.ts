@@ -14,7 +14,9 @@ import {
 })
 export class UserService {
   Api = 'http://localhost:8080/api/users';
+
   constructor(private http: HttpClient) {}
+
   private getHeaders(): HttpHeaders {
     const accessToken = localStorage.getItem('accessToken');
     return new HttpHeaders().set('Authorization', `Bearer ${accessToken}`);

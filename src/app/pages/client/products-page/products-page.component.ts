@@ -38,6 +38,7 @@ export class ProductsPageComponent implements OnInit, OnDestroy {
     { label: 'Giá từ cao đến thấp', value: '-price' },
   ];
   selectedSortOption = '';
+
   constructor(
     private productService: ProductService,
     private categoryService: CategoryService,
@@ -87,6 +88,7 @@ export class ProductsPageComponent implements OnInit, OnDestroy {
       }
     );
   }
+
   getProductFromCategory(categoryId: any): void {
     const options = {
       categoryId: categoryId,
@@ -105,6 +107,7 @@ export class ProductsPageComponent implements OnInit, OnDestroy {
         }
       );
   }
+
   applyFilters(): void {
     let filteredProducts = [...this.products];
 
